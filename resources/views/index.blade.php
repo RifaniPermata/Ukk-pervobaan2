@@ -140,7 +140,7 @@
                       	</div>
                   	</div>
                   
-                  <button type="submit" class="btn btn-primary text-white ml-auto" style="color: #fff !important">Daftar</button>
+                  <button type="submit" class="btn btn-primary btn-block text-white ml-auto" style="color: #fff !important">Daftar</button>
                 </form>
               </div>
               @endauth

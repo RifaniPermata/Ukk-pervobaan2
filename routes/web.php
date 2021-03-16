@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\PetugasController;
 use App\Http\Controllers\Admin\MasyarakatController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\TanggapanController;
+
 
 
 /*
@@ -42,6 +44,7 @@ Route::prefix('admin')->group(function(){
 	Route::resource('masyarakat', MasyarakatController::class);
 	Route::get('laporan', [LaporanController::class, 'index'])->name('laporan.index');
 
+	Route::post('tanggapan',[TanggapanController::class, 'createOrUpdate'])->name('tanggapan');
 
 
 // });

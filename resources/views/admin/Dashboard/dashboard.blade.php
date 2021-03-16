@@ -4,6 +4,7 @@
 @section('header', 'Dashboard')
 
 @section('content')
+{{--section hitungan --}}
 	<section class="content">
 		<div class="container-fluid">
 			<div class="row">
@@ -56,6 +57,48 @@
 		            <!-- /.info-box -->
 		        </div>
         	</div>
+		</div>
+	</section>
+
+{{--section liat pengaduan--}}
+	<section class="content mt-4">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body">
+							<table id="pengaduanTable" class="table" >
+						        <thead>
+									<tr>
+										<th>NO</th>
+										<th>Tanggal</th>
+										<th>Isi laporan</th>
+										<th>Status</th>										
+									</tr>
+								</thead>
+								<tbody>
+									@foreach($pengaduan as $k=>$v)
+									<tr>
+										<td> {{ $k += 1}}</td>
+										<td> {{ $v->tgl_pengaduan->format('d-M-Y') }}</td>
+										<td> {{ $v->isi_laporan }}</td>
+										<td>
+											@if($v->status == '0')
+											<a href="#" class="badge badge-danger">Pending</a>
+											@elseif($v->status == 'proses')
+											<a href="#" class="badge badge-warning">proses</a>
+											@else
+											<a href="#" class="badge badge-success">selesai</a>
+											@endif
+										</td>
+
+									@endforeach
+								</tbody>						        
+						    </table>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
 

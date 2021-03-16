@@ -15,7 +15,9 @@ class DashboardController extends Controller
    	$masyarakat =Masyarakat::all()->count();
    	$proses =Pengaduan::where('status','proses')->get()->count();
    	$selesai =Pengaduan::where('status','selesai')->get()->count();
+   	$pengaduan = Pengaduan::orderBy('tgl_pengaduan', 'desc')->get();
 
-   	return view('admin.Dashboard.dashboard',['petugas'=>$petugas, 'masyarakat'=>$masyarakat,'proses'=>$proses,'selesai'=>$selesai]);
+
+   	return view('admin.Dashboard.dashboard',['petugas'=>$petugas, 'masyarakat'=>$masyarakat,'proses'=>$proses,'selesai'=>$selesai, 'pengaduan'=>$pengaduan]);
    }
 }
