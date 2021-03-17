@@ -71,7 +71,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{{route('dasboard.index')}}" class="nav-link  {{Request::is('admin/dasboard') ? 'active' : ''}}">
+            <a href="{{route('dasboard.index')}}" class="nav-link  {{Request::is('admin/dashboard') ? 'active' : ''}}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                   Dashboard
@@ -135,8 +135,9 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{route('dasboard.index')}}">{{ Auth::guard('admin')->user()->nama_petugas }}</a></li>
+              @yield('header2')
               <li class="breadcrumb-item active">@yield('header')</li>
-
+              
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->

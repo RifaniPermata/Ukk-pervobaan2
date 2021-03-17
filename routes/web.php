@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Masyarakat\laporanMasyarakat;
 use App\Http\Controllers\Admin\PengaduanController;
@@ -37,18 +38,24 @@ Route::get('/laporan/{siapa?}', [laporanMasyarakat::class,'laporan'])->name('lap
 Route::get('/logout', [loginController::class,'logout'])->name('logout');
 
 Route::prefix('admin')->group(function(){
-	Route::get('/dasboard', [DashboardController::class, 'index'])->name('dasboard.index');
 
-	Route::resource('pengaduan', PengaduanController::class);
-	Route::resource('petugas', PetugasController::class);
-	Route::resource('masyarakat', MasyarakatController::class);
-	Route::get('laporan', [LaporanController::class, 'index'])->name('laporan.index');
+	// Route::middleware(['auth','cekLevel:admin,petugas'])->group(function(){
+		Route::resource('petugas', PetugasController::class);
+		Route::resource('masyarakat', MasyarakatController::class);
+		Route::get('laporan', [LaporanController::class, 'index'])->name('laporan.index');
+		Route::post('getLaporan',[LaporanController::class,'getLaporan'])->name('cari.laporan');
+		Route::get('cetak/{from}/{to}',[LaporanController::class,'cetakLaporan'])->name('export.laporan');
+	// });
+	// Route::middleware(['petugasMiddleware'])->group(function(){
+		Route::get('/dashboard', [DashboardController::class, 'index'])->name('dasboard.index');
+		Route::resource('pengaduan', PengaduanController::class);
+		Route::post('tanggapan',[TanggapanController::class, 'createOrUpdate'])->name('tanggapan');
+	// });
 
-	Route::post('tanggapan',[TanggapanController::class, 'createOrUpdate'])->name('tanggapan');
 
 
 // });
-// Route::group(['middleware'=> ['auth','ceklevel:admin,petugas']],function()
+// Route::group(['middleware'=> ['auth','cekLevel:admin,petugas']],function()
 // {
 // 	Route::get('/', [DashboardController::class, 'index'])->name('dasboard.index');
 

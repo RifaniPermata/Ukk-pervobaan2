@@ -2,7 +2,7 @@
 
 @section('css')
     <link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css">
-@endsection
+
 <style type="text/css">
 .photo {
     width: 70px;
@@ -14,7 +14,9 @@
 .laporan-top {
     padding-top: 16px;
 }
-
+.margin{
+    margin-top: -300px;
+}
 .laporan-top .profile {
     width: 50px;
     height: 50px;
@@ -25,6 +27,7 @@
 
 
 </style>
+@endsection
 @section('title', 'PERAKAT - Pengaduan Masyarakat')
 
 @section('content')
@@ -83,15 +86,19 @@
 </section>
  <main>
     <section>
-        <div class="jumbotron" style="background-image: url({{asset('assets/images/bg.jpg')}}); min-height: 635px; background-position: center;">
+        <div class="jumbotron" style="background-image: url({{asset('assets/images/bg.jpg')}}); min-height: 550px; background-position: center;">
+            <div class="text-center mt-5 container">
+                      <h1 class="medium text-white">Layanan Pengaduan Masyarakat Online</h1>
+                      <h5 class="italic text-white mb-5 " style="color: #fff !important">Selamat Datang,{{ Auth::guard('masyarakat')->user()->nama }}. Sampaikan keluhan anda langsung kepada pihak berwenang</h5>
+                  </div>
         </div>
     </section>
 </main>
 {{-- Section Card --}}
 <div class="container">
-    <div class="row justify-content-between">
-        <div class="col-lg-8 col-md-12 col-sm-12 col-12 col">
-            <div class="content content-top shadow">
+    <div class="row justify-content-between margin" >
+        <div class="col-lg-8 col-12 col card pt-2">
+            <div class="content content-top">
                 @if ($errors->any())
                 @foreach ($errors->all() as $error)
                 <div class="alert alert-danger">{{ $error }}</div>
@@ -100,22 +107,22 @@
                 @if (Session::has('pengaduan'))
                 <div class="alert alert-{{ Session::get('type') }}">{{ Session::get('pengaduan') }}</div>
                 @endif
-                <div class="card p-3 mb-4">Tulis Laporan Disini</div>
+                <div class="card p-3 mb-4 card header mt-2 text-center"><b>TULIS LAPORAN DISINI</div>
                 <form action="{{ route('pengaduan') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <textarea name="isi_laporan" placeholder="Masukkan Isi Laporan" class="form-control"
                             rows="4">{{ old('isi_laporan') }}</textarea>
                     </div>
-                    <div class="form-group">
-                        <input type="file" name="foto" class="form-control">
+                    <div class="form-group pt-2">
+                        <input type="file" name="foto" class="form-control pt-2">
                     </div>
-                    <button type="submit" class="btn btn-custom mt-2">Kirim</button>
+                    <button type="submit" class="btn btn-block btn-primary mt-2">Kirim</button>
                 </form>
             </div>
         </div>
-        <div class="col-lg-4 col-md-12 col-sm-12 col-12 col">
-            <div class="content content-bottom shadow">
+        <div class="col-lg-12 col card">
+            <div class="content content-bottom mt-2">
                 <div>
                     <img src="{{ asset('assets/images/user_default.svg') }}" alt="user profile" class="photo">
                     <div class="self-align">
@@ -147,7 +154,7 @@
         </div>
     </div>
 
-    <div class="row mt-5">
+    <div class="row mt-4">
         <div class="col-lg-8">
             <a class="d-inline tab {{ $siapa != 'me' ? 'tab-active' : ''}} mr-4" href="{{ route('laporan') }}">
                 Semua

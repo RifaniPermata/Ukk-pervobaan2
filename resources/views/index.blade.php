@@ -2,13 +2,22 @@
 
 @section('css')
     <link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css">
+    <style type="text/css">
+      .margin{
+          margin-top: -150px;
+      }
+      .mg{
+        margin-top: -50px;
+      }
+    </style>
 @endsection
 
 @section('title', 'PERAKAT - Pengaduan Masyarakat')
 
 @section('content')
 {{-- Section Header --}}
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top container" id="navbar" style="background: #cb4c3c !important">
+<section class="header">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top container" id="navbar" style="background: #cb4c3c !important">
         <a class="navbar-brand" href="#"><img src="assets/images/logo.png" style="max-width: 50px"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -23,17 +32,17 @@
           </ul>
 
           <div >
-          	 @if(Auth::guard('masyarakat')->check())
+             @if(Auth::guard('masyarakat')->check())
              <div class="d-inline">
                 <a href="{{ route('view.index') }}" class="btn text-white">Home</a>             
              </div>
-          	 <div class="d-inline">
-                <a href="{{ route('laporan') }}" class="btn text-white">Laporan</a>          	 	
-          	 </div>
-          	  <div class="d-inline">
-                <a href="{{ route('logout') }}" class="btn text-white">{{ Auth::guard('masyarakat')->user()->nama }}</a>      	 	
-          	 </div>
-          	 @else
+             <div class="d-inline">
+                <a href="{{ route('laporan') }}" class="btn text-white">Laporan</a>             
+             </div>
+              <div class="d-inline">
+                <a href="{{ route('logout') }}" class="btn text-white">{{ Auth::guard('masyarakat')->user()->nama }}</a>          
+             </div>
+             @else
             @guest
               <div class="d-inline">
                 <button class="btn d-inline text-white" data-toggle="modal" data-target="#loginModal">Masuk</button>
@@ -56,15 +65,21 @@
             
           </div>
         </div>
-      </nav>
+  </nav>
+</section>
+
 {{-- Section Card Pengaduan --}}
  <main>
     <section>
-          <div class="jumbotron" style="background-image: url('assets/images/bg.jpg'); min-height: 635px; background-position: center;">
+          <div class="jumbotron" style="background-image: url('assets/images/bg.jpg');background-position:center;min-height: 435px;">
 
             <div class="row container" style="margin-top: 100px;">
               @if(Auth::guard('masyarakat')->check())
-                <p class="display-3 text-white text-center" style="color: #fff !important">Selamat Datang,{{ Auth::guard('masyarakat')->user()->nama }}. <br> Di Layanan Pengaduan Masyarakat Online</p>
+                  <div class="text-center container mg">
+                      <h1 class="medium text-white">Layanan Pengaduan Masyarakat Online</h1>
+                      <h5 class="italic text-white mb-5 " style="color: #fff !important">Selamat Datang,{{ Auth::guard('masyarakat')->user()->nama }}. Sampaikan keluhan anda langsung kepada pihak berwenang</h5>
+                  </div>
+                {{--  --}}
               @else
               <div class="col-md-6 text-center my-auto align-middle container">
                 <h6 class="display-4 text-white" style="color: #fff !important">Layanan Pengaduan Masyarakat Online</h6>
@@ -212,8 +227,10 @@
             </div>
         </div>
     </div>
+
 <!-- cara melakukan pengaduan -->
-    <div class="container">
+    @if(Auth::guard('masyarakat')->check())
+    <div class="container margin">
       <div class="d-md-flex flex-row justify-content-around bd-highlight mb-3">
         <div class="p-2 bd-highlight card ml-auto mr-auto mb-3" style="width: 13rem">
           <i class="fa fa-sign-in fa-5x text-center rounded-circle p-1 mx-5 text-white" aria-hidden="true" style="background: red;"></i>
@@ -262,19 +279,72 @@
         </div>
       </div>
     </div>
-    {{-- Section Hitung Pengaduan --}}
-    <div class="bg-danger mt-5 p-3">
-            <div class="text-center">
-                <h5 class="medium text-white mt-3">JUMLAH LAPORAN ANDA SEKARANG</h5>
-                <h2 class="medium text-white">10</h2>
-            </div>
+    @else
+        <div class="container ">
+      <div class="d-md-flex flex-row justify-content-around bd-highlight mb-3">
+        <div class="p-2 bd-highlight card ml-auto mr-auto mb-3" style="width: 13rem">
+          <i class="fa fa-sign-in fa-5x text-center rounded-circle p-1 mx-5 text-white" aria-hidden="true" style="background: red;"></i>
+          <div class="card-body text-center">
+            <h5>1. Masuk</h5>
+            <p class="card-text">
+              Masuk ke akun anda, jika belum punya akun maka Daftar terlebih dahulu. 
+            </p>
+          </div>
+        </div>
+        <div class="p-2 bd-highlight card ml-auto mr-auto mb-3" style="width: 13rem">
+          <i class="fa fa-pencil-square-o fa-5x text-center " aria-hidden="true"></i>
+          <div class="card-body text-center">
+            <h5>2.Tulis Laporan</h5>
+            <p class="card-text">
+              Klik menu laporan, kemudian tulis laporan keluhan Anda dengan jelas.
+            </p>
+          </div>
+        </div>
+        <div class="p-2 bd-highlight card ml-auto mr-auto mb-3" style="width: 13rem">
+          <i class="fa fa-refresh fa-spin fa-5x text-center rounded-circle p-1 mx-5 text-white" aria-hidden="true" style="background: yellow;"></i>
+          <div class="card-body text-center">
+            <h5>3. Proses Verifikasi</h5>
+            <p class="card-text">
+              Tunggu sampai laporan Anda di verifikasi.
+            </p>
+          </div>
+        </div>
+        <div class="p-2 bd-highlight card ml-auto mr-auto mb-3" style="width: 13rem">
+          <i class="fa fa-puzzle-piece fa-5x text-center" aria-hidden="true"></i>
+          <div class="card-body text-center">
+            <h5>4. Tindak Lanjut</h5>
+            <p class="card-text">
+              Laporan Anda sedang dalam tindak lanjut.
+            </p>
+          </div>
+        </div>
+        <div class="p-2 bd-highlight card ml-auto mr-auto mb-3" style="width: 13rem">
+          <i class="fa fa-check-square-o fa-5x text-center rounded-circle p-3 mx-5 text-white" style="background: green;" aria-hidden="true"></i>
+          <div class="card-body text-center">
+            <h5>5. Selesai</h5>
+            <p class="card-text">
+              Laporan pengaduan telah selesai ditindak.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
+    @endauth
+    {{-- Section Hitung Pengaduan --}}
+  <section>
+      <div class="bg-danger mt-5 p-3">
+          <div class="text-center">
+              <h5 class="medium text-white mt-3">JUMLAH LAPORAN</h5>
+              <h2 class="medium text-white">{{$pengaduanAll}}</h2>
+          </div>
+      </div>
     {{-- Footer --}}
-	<footer class="text-center p-4 text-white bg-secondary ml-auto mt-5">
+    <footer class="text-center p-4 text-white bg-secondary ml-auto mt-5">
       © 2021 PERAKAT | By
       <a href="#" class="text-blue-200" target="_blank">@rfni_p</a>
     </footer>
-    @endsection
+  </section>
+@endsection
 
 @section('js')
     <script>
@@ -289,7 +359,7 @@
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
       document.getElementById("navbar").style.top = "0";
     } else {
-      document.getElementById("navbar").style.top = "-70px";
+      document.getElementById("navbar").style.top = "-150px";
     }
   }
   @if (Session::has('pesan'))

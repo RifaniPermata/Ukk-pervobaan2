@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Masyarakat;
+use App\Models\Pengaduan;
 use App\Models\Petugas;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -13,7 +14,9 @@ class LoginController extends Controller
 {
 	public function index()
     {
-        return view('index');
+        $pengaduanAll =Pengaduan::all()->count();
+
+        return view('index',['pengaduanAll'=>$pengaduanAll]);
     }
     public function login(Request $request)
     {
@@ -46,7 +49,7 @@ class LoginController extends Controller
         if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password])) {
             return redirect()->route('dasboard.index');
         }else {
-            return redirect()->back()->with(['pesan' => 'Akun tidak terdaftar!']);
+            return redirect()->back()->with(['pesan' => 'Username atau Password Salah!']);
         }
     }
         public function logout()

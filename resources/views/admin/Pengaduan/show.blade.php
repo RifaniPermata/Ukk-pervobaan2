@@ -2,7 +2,11 @@
 
 
 @section('title', 'Detail Pengaduan')
-@section('header', 'Detail Pengaduan')
+@section('header', 'Pengaduan Masyarakat')
+@section('header2')
+    <li class="breadcrumb-item active"> <a href="{{ route('pengaduan.index') }}">Detail Pengaduan</a></li>
+@endsection
+
 @section('content')
 	<section class="content">
 		<div class="container-fluid">
@@ -10,7 +14,7 @@
 				<div class="col-lg-6 col-12">
 					<div class="card">
 						<div class="card-header text-center">
-							Pengaduan Masyarakat
+							<b>Pengaduan Masyarakat</b>
 						</div>
 						<div class="card-body">
 							<table class="table">
@@ -51,7 +55,7 @@
 				<div class="col-lg-6 col-12">
 					<div class="card">
 						<div class="card-header text-center">
-							Tanggapan Petugas
+							<b>Tanggapan Petugas</b>
 						</div>
 						<div class="card-body">
 							<form action="{{route('tanggapan')}}" method="POST">
@@ -81,7 +85,7 @@
 									<label for="tanggapan">Tanggapan</label>
 									<textarea name="tanggapan" id="tanggapan" rows="4" class="form-control" placeholder="Belum ada tanggapan" >{{$tanggapan->tanggapan ?? ''}}</textarea>
 								</div>
-								<button type="submit" class="btn btn-block btn-primary">KIRIM</button>
+								<button type="submit" class="btn btn-block btn-success">KIRIM</button>
 							</form>
 							@if(Session::has('status'))
 							<div class="alert alert-success mt-2">

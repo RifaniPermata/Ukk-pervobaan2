@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
-class Ceklevel
+class PetugasMiddleware
 {
     /**
      * Handle an incoming request.
@@ -18,8 +18,13 @@ class Ceklevel
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::guard('admin')->check() && Auth::guard('admin')->user()->level =='admin')){
-            return $next($request);
+        if(Auth::guard('admin')->check()){
+            if(Auth::guard('admin')->user()->level =='petugas'){
+                return $next($request);
+            }elseif(Auth::guard('admin')->user()->level =='admin'){
+                return $next($request);
+            }
+            
         }
         return redirect('/');
     }
