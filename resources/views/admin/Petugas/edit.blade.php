@@ -65,7 +65,7 @@
 		                        		<button type="submit" class="btn btn-warning text-white" style="width: 100%">UPDATE</button>
 		                        	</div>
 		                    </form>	
-		                    <form action="{{ route('petugas.destroy', $petugas->id_petugas) }}" method="POST" class="col-lg-6">
+		                    <form action="{{ route('petugas.destroy', $petugas->id_petugas) }}" method="POST" class="col-lg-6" onsubmit="return confirm('Apakah yakin hapus data??')">
 		                        @csrf
 		                        @method('DELETE')
 		                        <button type="submit" class="btn btn-danger mt-2" style="width: 100%"S>HAPUS</button>

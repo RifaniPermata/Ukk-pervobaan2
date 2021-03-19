@@ -41,6 +41,8 @@ class LoginController extends Controller
         //     return redirect()->back()->with(['pesan' => 'Password tidak sesuai']);
         // }
             // dd($request->all());
+        // $petugas =Petugas::all();
+
         if (Auth::guard('masyarakat')->attempt(['username' => $request->username, 'password' => $request->password])) {
             return redirect()->back();
         } 

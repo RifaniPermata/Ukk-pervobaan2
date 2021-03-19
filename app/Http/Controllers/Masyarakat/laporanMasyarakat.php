@@ -11,12 +11,15 @@ use App\Http\Controllers\Controller;
 
 class laporanMasyarakat extends Controller
 {
+
     public function storePengaduan(Request $request)
     {
         $data = $request->all();
 
         $validate = Validator::make($data, [
             'isi_laporan' => ['required'],
+            'lokasi_kejadian' => ['required'],
+            'kategori_kejadian' => ['required'],
         ]);
 
         if ($validate->fails()) {
@@ -33,6 +36,8 @@ class laporanMasyarakat extends Controller
             'tgl_pengaduan' => date('Y-m-d h:i:s'),
             'nik' => Auth::guard('masyarakat')->user()->nik,
             'isi_laporan' => $data['isi_laporan'],
+             'lokasi_kejadian' => $data['lokasi_kejadian'],
+            'kategori_kejadian' => $data['kategori_kejadian'],
             'foto' => $data['foto'] ?? '',
             'status' => '0',
         ]);

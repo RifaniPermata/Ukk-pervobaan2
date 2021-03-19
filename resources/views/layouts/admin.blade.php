@@ -34,22 +34,12 @@
         </a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="{{route('logout')}}">
-          <i class="fas fa-angle-down"></i>
+        <a class="nav-link" href="{{route('logout')}}" onsubmit="return confirm('Apakah yakin ingin keluar??')">
+          <i class="fas fa-power-off"></i>
         </a>
       </li>
     </ul>
-     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
+    
   </nav>
 
   {{--section navbar samping--}}
@@ -90,19 +80,20 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a href="{{route('petugas.index')}}" class="nav-link {{Request::is('admin/petugas') ? 'active' : ''}}">
-            <i class="nav-icon fas fa-user-edit"></i>              
-              <p>
-                Petugas 
-                <i class="right fas fa-angle-right"></i>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item ">
             <a href="{{route('masyarakat.index')}}" class="nav-link {{Request::is('admin/masyarakat') ? 'active' : ''}}">
             <i class="nav-icon fas fa-users"></i>              
               <p>
                 Masyarakat 
+                <i class="right fas fa-angle-right"></i>
+              </p>
+            </a>
+          </li>
+            @if(Auth::guard('admin')->user()->level=='admin')
+          <li class="nav-item ">
+            <a href="{{route('petugas.index')}}" class="nav-link {{Request::is('admin/petugas') ? 'active' : ''}}">
+            <i class="nav-icon fas fa-user-edit"></i>              
+              <p>
+                Petugas 
                 <i class="right fas fa-angle-right"></i>
               </p>
             </a>
@@ -116,6 +107,7 @@
               </p>
             </a>
           </li>
+          @endif
         </ul>
       </nav>
         <!-- /.sidebar-menu -->
@@ -161,6 +153,13 @@
   <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <script src="{{ asset('assets/plugins/jquery/jquery.min.js')}}"></script>
+<!-- Bootstrap -->
+<script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- overlayScrollbars -->
+{{-- <script src="{{ asset('assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script> --}}
+<!-- AdminLTE App -->
+<script src="{{asset('assets/dist/js/adminlte.js')}}"></script>
+
 @yield('js')
 
 

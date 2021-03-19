@@ -59,7 +59,7 @@
                 <a href="{{ route('logout') }}" class="btn text-white">{{ Auth::guard('masyarakat')->user()->nama }}</a>      	 	
           	 </div>
           	 @else
-            @guest
+            {{-- @guest --}}
               <div class="d-inline">
                 <button class="btn d-inline text-white" data-toggle="modal" data-target="#loginModal">Masuk</button>
               </div>
@@ -67,15 +67,15 @@
                 <a href="{{ route('formRegister') }}" class="btn text-white">Daftar</a>
 
               </div>
-            @else
+{{--             @else
               <div class="d-inline">
                 <a href="#" class="btn text-white" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">Logout</a>
                 <form id="logout-form" action="#" method="POST" class="d-none">
                   @csrf
                 </form>
-              </div>
-            @endguest
+              </div> --}}
+            {{-- @endguest --}}
              @endauth
             
             
@@ -97,27 +97,40 @@
 {{-- Section Card --}}
 <div class="container">
     <div class="row justify-content-between margin" >
-        <div class="col-lg-8 col-12 col card pt-2">
+        <div class="col-lg-8 col-12 col  card pt-4 pb-4">
             <div class="content content-top">
-                @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                <div class="alert alert-danger">{{ $error }}</div>
-                @endforeach
-                @endif
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                        <div class="alert alert-danger">{{ $error }}</div>
+                        @endforeach
+                    @endif
                 @if (Session::has('pengaduan'))
-                <div class="alert alert-{{ Session::get('type') }}">{{ Session::get('pengaduan') }}</div>
+                    <div class="alert alert-{{ Session::get('type') }}">{{ Session::get('pengaduan') }}</div>
                 @endif
-                <div class="card p-3 mb-4 card header mt-2 text-center"><b>TULIS LAPORAN DISINI</div>
+                <div class="card p-3 mb-4 card-header mt-2 text-center"><b>TULIS LAPORAN DISINI</div>
                 <form action="{{ route('pengaduan') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
+                        <input type="file" name="foto" class="form-control pb-2">
+                    </div>
+                    <div class="form-group pt-2">
+                        <textarea name="lokasi_kejadian" id="latlang" rows="3" class="form-control mb-3"
+                            placeholder="Lokasi Kejadian">{{ old('lokasi_kejadian') }}</textarea>
+                    </div>
+                    <div class="form-group pt-2">
+                        <div class="input-group mb-3">
+                            <select name="kategori_kejadian" class="custom-select" id="inputGroupSelect01" required>
+                                <option value="" selected>Pilih Kategori Kejadian</option>
+                                <option value="jalan">Jalan Berlubang</option>
+                                <option value="bansos">Bantuan Sosial</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group pt-2">
                         <textarea name="isi_laporan" placeholder="Masukkan Isi Laporan" class="form-control"
                             rows="4">{{ old('isi_laporan') }}</textarea>
                     </div>
-                    <div class="form-group pt-2">
-                        <input type="file" name="foto" class="form-control pt-2">
-                    </div>
-                    <button type="submit" class="btn btn-block btn-primary mt-2">Kirim</button>
+                    <button type="submit" class="btn btn-block btn-success mt-2">Kirim</button>
                 </form>
             </div>
         </div>
@@ -165,19 +178,26 @@
             <hr>
         </div>
         @foreach ($pengaduan as $k => $v)
-        <div class="col-lg-8">
+        <div class="col-lg-8 card mb-2 pb-4">
             <div class="laporan-top">
                 <img src="{{ asset('assets/images/user_default.svg') }}" alt="profile" class="profile">
                 <div class="d-flex justify-content-between">
-                    <div>
-                        <p>{{ $v->user->nama }}</p>
-                        @if ($v->status == '0')
-                        <p class="text-danger">Pending</p>
-                        @elseif($v->status == 'proses')
-                        <p class="text-warning">{{ ucwords($v->status) }}</p>
-                        @else
-                        <p class="text-success">{{ ucwords($v->status) }}</p>
-                        @endif
+                    <div class="">
+                            <p>{{ $v->user->nama }}</p>
+                        <div class="row ">
+                            <div class="d-inline p-2">
+                                @if ($v->status == '0')
+                                    <p class="text-danger">Pending</p>
+                                @elseif($v->status == 'proses')
+                                    <p class="text-warning">{{ ucwords($v->status) }}</p>
+                                @else
+                                    <p class="text-success">{{ ucwords($v->status) }}</p>
+                                @endif
+                            </div>
+                            <div class="d-inline p-2">
+                                <p>{{ $v->lokasi_kejadian }}</p>
+                            </div>
+                        </div>
                     </div>
                     <div>
                         <p>{{ $v->tgl_pengaduan->format('d M, h:i') }}</p>
@@ -192,14 +212,15 @@
             </div>
             <div class="laporan-bottom">
                 @if ($v->foto != null)
-                <img src="{{ Storage::url($v->foto) }}" alt="{{ 'Gambar '.$v->judul_laporan }}" class="gambar-lampiran">
+                <center>
+                    <img src="{{ Storage::url($v->foto) }}" style="max-width: 441px" width="90%" alt="{{ 'Gambar '.$v->judul_laporan }}" class="gambar-lampiran">
+                </center>
                 @endif
                 @if ($v->tanggapan != null)
                 <p class="mt-3 mb-1">{{ '*Tanggapan dari '. $v->tanggapan->petugas->nama_petugas }}</p>
                 <p class="light">{{ $v->tanggapan->tanggapan }}</p>
                 @endif
             </div>
-            <hr>
         </div>
         @endforeach
     </div>

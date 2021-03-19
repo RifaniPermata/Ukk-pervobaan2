@@ -18,6 +18,8 @@ class CreatePengaduansTable extends Migration
             $table->dateTime('tgl_pengaduan');
             $table->char('nik',16);
             $table->text('isi_laporan');
+             $table->text('lokasi_kejadian');
+            $table->enum('kategori_kejadian', ['jalan', 'bansos']);
             $table->string('foto');
             $table->enum('status',['0','proses','selesai']);
 
