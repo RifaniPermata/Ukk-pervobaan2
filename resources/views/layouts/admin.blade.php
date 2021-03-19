@@ -16,7 +16,7 @@
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
   <div class="wrapper">
   {{-- section navbar atas --}}
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light ">
     <!-- Left navbar links -->
     <!-- menu navbar besar-kecil -->
     <ul class="navbar-nav">
@@ -159,6 +159,8 @@
 {{-- <script src="{{ asset('assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script> --}}
 <!-- AdminLTE App -->
 <script src="{{asset('assets/dist/js/adminlte.js')}}"></script>
+<script src="{{asset('assets/dist/js/demo.js')}}"></script>
+
 
 @yield('js')
 

@@ -101,7 +101,36 @@ class LoginController extends Controller
        return redirect()->back()->with(['berhasil' => 'Data sudah berhasil,Silahkan Login!!']);
     }
     
+    //     public function sendVerification()
+    // {
+    //     $nik = Auth::guard('masyarakat')->user()->nik;
+    //     $email = Auth::guard('masyarakat')->user()->email;
+    //     $nama = Auth::guard('masyarakat')->user()->nama;
+    //     $link = URL::temporarySignedRoute('verify', now()->addMinutes(30), ['nik' => $nik]);
+    //     Mail::to($email)->send(new VerifikasiEmailUntukRegistrasiPengaduanMasyarakat($nama, $link));
 
+    //     return redirect()->back();
+    // }
+
+    // public function verify($nik, Request $request)
+    // {
+    //     $masyarakat = Masyarakat::where('nik', $nik)->first();
+
+    //     if ($masyarakat->email_verified_at == null) {
+    //         if ($request->hasValidSignature()) {
+
+    //             date_default_timezone_set('Asia/Bangkok');
+
+    //             $masyarakat->update(['email_verified_at' => date('Y-m-d h:i:s')]);
+
+    //             return view('masyarakat.success');
+    //         } else {
+    //             return view('masyarakat.failed');
+    //         }
+    //     } else {
+    //         return view('masyarakat.failed');
+    //     }
+    // }
 
 
 }

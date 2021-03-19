@@ -28,6 +28,9 @@ use App\Http\Controllers\Admin\TanggapanController;
 // Route::get('/', function () {
 //     return view('index');
 // });
+// Route::post('/masyarakat/sendverification', [LoginController::class, 'sendVerification'])->name('sendVerification');
+// Route::get('/masyarakat/verify/{nik}', [LoginController::class, 'verify'])->name('verify');
+
 Route::get('/', [LoginController::class, 'index'])->name('view.index');
 Route::post('/register', [LoginController::class,'register'])->name('formRegister');
 

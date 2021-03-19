@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
+
 class Petugas extends Authenticatable
 {
     use HasFactory;
@@ -23,4 +24,5 @@ class Petugas extends Authenticatable
         protected $hidden = [
         'password'
     ];
+
 }

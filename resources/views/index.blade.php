@@ -39,11 +39,14 @@
              <div class="d-inline">
                 <a href="{{ route('laporan') }}" class="btn text-white">Laporan</a>             
              </div>
-              <div class="d-inline">
-                <a href="{{ route('logout') }}" class="btn text-white">{{ Auth::guard('masyarakat')->user()->nama }}</a>          
+             {{-- --}}
+              <div class="d-inline dropdown">
+                <a href="#" class="btn text-white dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"  aria-expanded="false">{{ Auth::guard('masyarakat')->user()->nama }}</a>  
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{{ route('logout') }}">Log Out</a>   
              </div>
              @else
-            @guest
+            {{-- @guest --}}
               <div class="d-inline">
                 <button class="btn d-inline text-white" data-toggle="modal" data-target="#loginModal">Masuk</button>
               </div>
@@ -51,15 +54,15 @@
                 <a href="{{ route('formRegister') }}" class="btn text-white">Daftar</a>
 
               </div>
-            @else
+        {{--     @else
               <div class="d-inline">
                 <a href="#" class="btn text-white" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">Logout</a>
                 <form id="logout-form" action="#" method="POST" class="d-none">
                   @csrf
                 </form>
-              </div>
-            @endguest
+              </div> --}}
+            {{-- @endguest --}}
              @endauth
             
             
