@@ -16,8 +16,11 @@
 
 @section('content')
 {{-- Section Header --}}
+
 <section class="header">
+
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top container" id="navbar" style="background: #cb4c3c !important">
+
         <a class="navbar-brand" href="#"><img src="assets/images/logo.png" style="max-width: 50px"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -30,21 +33,41 @@
             </li>
 
           </ul>
+            @if (Auth::guard('masyarakat')->check() && Auth::guard('masyarakat')->user()->email_verified_at == null)
+                {{-- <div class="row"> --}}
+                    <div class="col card bg-warning">
+                        <div class="card-body">
+                            Cek email <span class="font-weight-bold ">{{ Auth::guard('masyarakat')->user()->email }}</span>
+                            untuk mengkonfirmasi dan melindungi akun Anda serta agar dapat mengirimkan pengaduan di website ini. Jika belum ada email, maka klik tombol verifikasi berikut kemudian cek kembali email.
+                            <form action="{{ route('pekat.sendVerification') }}" method="POST" style="display: inline-block">
+                                @csrf
+                                <button type="submit" class="btn btn-danger d-inline">Verifikasi Sekarang</button>
+                            </form>
+                        </div>
+                    </div>
+                {{-- </div> --}}
+        @endif
 
           <div >
              @if(Auth::guard('masyarakat')->check())
-             <div class="d-inline">
+           {{--   <div class="d-inline">
                 <a href="{{ route('view.index') }}" class="btn text-white">Home</a>             
              </div>
              <div class="d-inline">
                 <a href="{{ route('laporan') }}" class="btn text-white">Laporan</a>             
-             </div>
+             </div> --}}
              {{-- --}}
               <div class="d-inline dropdown">
                 <a href="#" class="btn text-white dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"  aria-expanded="false">{{ Auth::guard('masyarakat')->user()->nama }}</a>  
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{{ route('logout') }}">Log Out</a>   
+                <a href="{{ route('view.index') }}" class="dropdown-item"><i class="fa fa-home mr-1"></i>Home</a>       
+                <a href="{{ route('laporan') }}" class="dropdown-item"><i class="fa fa-bullhorn mr-1"></i>Laporan</a>             
+                  <hr class="dropdown-divider">
+                  <a class="dropdown-item" href="{{ route('logout') }}"><i class="fa fa-sign-out mr-1"></i>Log Out</a>   
              </div>
+             {{-- <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li> --}}
              @else
             {{-- @guest --}}
               <div class="d-inline">
@@ -69,18 +92,22 @@
           </div>
         </div>
   </nav>
+
 </section>
+
 
 {{-- Section Card Pengaduan --}}
  <main>
     <section>
-          <div class="jumbotron" style="background-image: url('assets/images/bg.jpg');background-position:center;min-height: 435px;">
 
-            <div class="row container" style="margin-top: 100px;">
+          <div class="jumbotron" style="background-image: url('assets/images/bg.jpg');background-position:center;min-height: 440px;">
+
+            <div class="row " style="margin-top: 100px;">
               @if(Auth::guard('masyarakat')->check())
                   <div class="text-center container mg">
                       <h1 class="medium text-white">Layanan Pengaduan Masyarakat Online</h1>
-                      <h5 class="italic text-white mb-5 " style="color: #fff !important">Selamat Datang,{{ Auth::guard('masyarakat')->user()->nama }}. Sampaikan keluhan anda langsung kepada pihak berwenang</h5>
+                      <h5 class="italic text-white mb-5 " style="color: #fff !important">Selamat Datang,{{ Auth::guard('masyarakat')->user()->nama }}. Di website pengaduan layanan masyarakat kecamatan Pagaden.<br>Sampaikan keluhan anda langsung kepada pihak berwenang</h5>
+                      <h4 class="italic text-white"></h4>
                   </div>
                 {{--  --}}
               @else
@@ -95,12 +122,12 @@
                 <h3 class="mx-5 text-white text-center p-1">Daftar Lewat</h3> 
                    	<div class="social-auth-links text-center row mb-3">
                         <div class="col-md-6 ">
-                            <a href="#" class="btn btn-block btn-primary">
+                            <a href="{{ route('social.login', 'facebook') }}" class="btn btn-block btn-primary">
                                <i class="fa fa-facebook mr-1"></i>Facebook
                             </a>  
                         </div>
                         <div class="col-md-6  ">
-                            <a href="#" class="btn btn-block btn-danger">
+                            <a href="{{ route('social.login', 'google') }}" class="btn btn-block btn-danger">
                             	<i class="fa fa-google mr-1"></i>Google+
                             </a>
                         </div>                          
@@ -109,12 +136,17 @@
                 <form method="POST" action="{{ route('formRegister') }}">
                     @csrf
                     <div class="form-group">
-                    	<label for="nama" style="color: #fff !important">NIK</label>
-                        <input type="number" name="nik" placeholder="NIK" class="form-control">
+                    	<label for="nik" style="color: #fff !important">NIK</label>
+                        <input type="number"  value="{{ old('nik') }}" required name="nik" placeholder="NIK" class="form-control @error('nik') is-invalid @enderror">
+                        @error('nik')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 	                <div class="form-group">
 	                    <label for="nama" style="color: #fff !important">Nama Lengkap</label>
-	                    <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" required autocomplete="name" placeholder="Nama Lengkap" autofocus>
+	                    <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}"  autocomplete="name" required placeholder="Nama Lengkap" autofocus>
 	                    @error('nama')
 	                        <span class="invalid-feedback" role="alert">
 	                            <strong>{{ $message }}</strong>
@@ -122,12 +154,17 @@
 	                    @enderror
 	                </div>
 	                <div class="form-group">
-	                	<label for="nama" style="color: #fff !important">Username</label>
-                        <input type="text" name="username" placeholder="Username" class="form-control">
+	                	<label for="username_register" style="color: #fff !important">Username</label>
+                        <input type="text" name="username_register" required value="{{ old('username_register') }}"  placeholder="Username" class="form-control @error('username_register') is-invalid @enderror">
+                        @error('username_register')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 	                <div class="form-group">
 	                    <label for="email" style="color: #fff !important">Email</label>
-	                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="youremail@gmail.com" name="email" value="{{ old('email') }}" required autocomplete="email">
+	                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="youremail@gmail.com" name="email" value="{{ old('email') }}" required  autocomplete="email">
 	                    @error('email')
 	                        <span class="invalid-feedback" role="alert">
 	                            <strong>{{ $message }}</strong>
@@ -135,15 +172,20 @@
 	                    @enderror
                   	</div>
                   	<div class="form-group">
-	                	<label for="nama" style="color: #fff !important">No. Telp</label>
-                        <input type="number" name="telp" placeholder="No. Telp" class="form-control">
+	                	<label for="telp" style="color: #fff !important">No. Telp</label>
+                        <input type="number" name="telp"  value="{{ old('telp') }}" required placeholder="No. Telp" class="form-control @error('telp') is-invalid @enderror">
+                        @error('telp')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 				  	       <div class="row">
                       	<div class="col-md-6">
                             <div class="form-group">
-                                <label for="register-password" style="color: #fff !important">register-password</label>
-                                <input id="register-password" type="password" class="form-control @error('register-password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="********">
-                                @error('register-password')
+                                <label for="register_password" style="color: #fff !important">register_password</label>
+                                <input id="register_password" type="password" class="form-control @error('register_password') is-invalid @enderror" name="register_password" required autocomplete="new-password" placeholder="********">
+                                @error('register_password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -153,7 +195,7 @@
                       	<div class="col-md-6">
                           <div class="form-group">
                             <label for="password-confirm" style="color: #fff !important">Konfirmasi Password</label>
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="********">
+                            <input id="password-confirm" type="password" class="form-control" required name="password_confirmation" required autocomplete="new-password" placeholder="********">
                           </div>
                       	</div>
                   	</div>
@@ -181,12 +223,12 @@
                     <p class="mx-5 text-center">Masuk Lewat</p> 
                    	<div class="social-auth-links text-center row mb-3">
                         <div class="col-md-6 ">
-                            <a href="#" class="btn btn-block btn-primary">
+                            <a href="{{ route('social.login', 'facebook') }}" class="btn btn-block btn-primary">
                                <i class="fa fa-facebook mr-1"></i>Facebook
                             </a>  
                         </div>
                         <div class="col-md-6  ">
-                            <a href="#" class="btn btn-block btn-danger">
+                            <a href="{{ route('social.login', 'google') }}" class="btn btn-block btn-danger">
                             	<i class="fa fa-google mr-1"></i>Google+
                             </a>
                         </div>                          
@@ -196,7 +238,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="login-username" >Username</label>
-                            <input type="text" class="form-control @error('username') is-invalid @enderror" id="login-username" placeholder="username" autocomplete="username" autofocus name="username">    
+                            <input type="text" class="form-control @error('username') is-invalid @enderror" id="login-username" placeholder="username" autocomplete="username" value="{{ old('username') }}" autofocus name="username">    
                             @error('username')
                               <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>
@@ -205,7 +247,7 @@
                         </div>
                         <div class="form-group">
                             <label for="login-password" >Password</label>
-                            <input type="password"  class="form-control @error('password') is-invalid @enderror" id="login-password" autocomplete="current-password" name="password" placeholder="********">
+                            <input type="password"  class="form-control @error('password') is-invalid @enderror" id="login-password" autocomplete="current-password"  value="{{ old('password') }}" name="password" placeholder="********">
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -341,12 +383,9 @@
               <h2 class="medium text-white">{{$pengaduanAll}}</h2>
           </div>
       </div>
-    {{-- Footer --}}
-    <footer class="text-center p-4 text-white bg-secondary ml-auto mt-5">
-      © 2021 PERAKAT | By
-      <a href="#" class="text-blue-200" target="_blank">@rfni_p</a>
-    </footer>
+    
   </section>
+  
 @endsection
 
 @section('js')
@@ -355,15 +394,23 @@
       @error('username')
         $('#loginModal').modal('show')
       @enderror
-
+      @error('password')
+        $('#loginModal').modal('show')
+      @enderror
+      // hide navbar
+      var prevScrollpos = window.pageYOffset;
        window.onscroll = function() {scrollFunction()};
 
   function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-      document.getElementById("navbar").style.top = "0";
+    var currentScrollPos = window.pageYOffset;
+    if (prevScrollpos > currentScrollPos) {
+    document.getElementById("navbar").style.top = "0";
+    // }if(document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    //   document.getElementById("navbar").style.top = "0";
     } else {
       document.getElementById("navbar").style.top = "-150px";
     }
+      prevScrollpos = currentScrollPos;
   }
   @if (Session::has('pesan'))
    $('#loginModal').modal('show');
@@ -372,5 +419,4 @@
     @endif
     </script>
    
-
 @endsection

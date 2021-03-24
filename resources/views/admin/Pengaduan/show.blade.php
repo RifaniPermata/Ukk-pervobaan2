@@ -30,6 +30,16 @@
 										<td>{{$pengaduan->tgl_pengaduan}}</td>
 									</tr>
 									<tr>
+										<th>Lokasi</th>
+										<td>:</td>
+										<td>{{$pengaduan->lokasi_kejadian}}</td>
+									</tr>
+									<tr>
+										<th>Kategori</th>
+										<td>:</td>
+										<td>{{$pengaduan->kategori_kejadian}}</td>
+									</tr>
+									<tr>
 										<th>Foto</th>
 										<td>:</td>
 										<td><img src="{{Storage::url($pengaduan->foto)}}" alt="foto pengaduan" class="embed-responsive"></td>

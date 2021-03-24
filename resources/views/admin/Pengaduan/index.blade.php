@@ -15,13 +15,14 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-12">
-					<div class="card">
+					<div class="card ">
 						<div class="card-body">
 							<table id="pengaduanTable" class="table table-striped table-bordered" >
 						        <thead class="table-dark text-center">
 									<tr>
 										<th>NO</th>
 										<th>Tanggal</th>
+										<th>Lokasi</th>
 										<th>Isi laporan</th>
 										<th>Status</th>
 										<th>Detail</th>
@@ -32,6 +33,7 @@
 									<tr>
 										<td class="text-center"> {{ $k += 1}}</td>
 										<td> {{ $v->tgl_pengaduan->format('d-M-Y') }}</td>
+										<td> {{ $v->lokasi_kejadian }}</td>
 										<td> {{ $v->isi_laporan }}</td>
 										<td>
 											@if($v->status == '0')
@@ -44,7 +46,7 @@
 										</td>
 										<td class="text-center">
 											<button class="btn btn-info">
-											<a href="{{route('pengaduan.show', $v->id_pengaduan)}}" class="text-dark"><i class="fas fa-eye"></i> Lihat</a>
+											<a href="{{route('pengaduan.show', $v->id_pengaduan)}}" class="text-white"><i class="fas fa-eye"></i> Lihat</a>
 											</button>
 										</td>
 									</tr>

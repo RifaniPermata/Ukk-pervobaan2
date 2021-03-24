@@ -16,7 +16,7 @@
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-								<a href="{{ route('petugas.create') }}" class="btn btn-success float-right">Tambah Petugas</a>
+								<a href="{{ route('petugas.create') }}" class="btn btn-success float-right"><i class="fas fa-user-plus mr-1"></i>Petugas</a>
 						</div>
 						<div class="card-body">   					
 							<table id="tanggapanTable" class="table table-striped table-bordered" >

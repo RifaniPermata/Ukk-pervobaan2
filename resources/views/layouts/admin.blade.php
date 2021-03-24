@@ -16,7 +16,7 @@
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
   <div class="wrapper">
   {{-- section navbar atas --}}
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light ">
+  <nav class="main-header navbar navbar-expand navbar-danger navbar-light ">
     <!-- Left navbar links -->
     <!-- menu navbar besar-kecil -->
     <ul class="navbar-nav">
@@ -35,7 +35,8 @@
       </li>
        <li class="nav-item">
         <a class="nav-link" href="{{route('logout')}}" onsubmit="return confirm('Apakah yakin ingin keluar??')">
-          <i class="fas fa-power-off"></i>
+          {{-- <i class="fas fa-power-off"></i> --}}
+          <i class="fas fa-sign-out-alt"></i>
         </a>
       </li>
     </ul>
@@ -43,17 +44,24 @@
   </nav>
 
   {{--section navbar samping--}}
-  <aside class="main-sidebar sidebar-dark-danger elevation-4">
+  <aside class="main-sidebar sidebar-light-danger elevation-4">
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar-danger pt-3 ">
         <!-- Sidebar user panel (optional) -->
       <div class="user-panel pb-3 mb-3 d-flex">
+         @if(Auth::guard('admin')->user()->level=='admin')
         <div class="image">
           <img src="{{ asset('assets/dist/img/user.jpeg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
+        @else
+         <div class="image">
+          <img src="{{ asset('assets/dist/img/petugas.png')}}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        @endif
 
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::guard('admin')->user()->nama_petugas }}</a>
+          {{-- <a href="#" class="d-block">{{ Auth::guard('admin')->user()->nama_petugas }}</a> --}}
+          {{ Auth::guard('admin')->user()->nama_petugas }}
         </div>
       </div>
         <!-- Sidebar Menu -->
@@ -141,7 +149,7 @@
   
   <!-- Main Footer -->
   <footer class="main-footer text-center">
-    <strong>Copyright &copy; 2021 <a href="#">@rfni_p</a>.</strong>
+    <strong>Copyright &copy; 2021 <a href="https://www.instagram.com/rfni_p/">@rfni_p</a>.</strong>
   </footer>
 
 </div>

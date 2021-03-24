@@ -12,7 +12,7 @@
         }
 
         .text-purple {
-            color: #6a70fc;
+            color: #FFF;
         }
 
         .text-grey {
@@ -45,7 +45,7 @@
         }
     </style>
 
-    <title>Verifikasi Email - PEKAT</title>
+    <title>Verifikasi Email - PERAKAT</title>
 </head>
 <body>
     <div class="text-center">
@@ -55,7 +55,7 @@
     <p class="text-grey mb-3">Gunakan tombol dibawah ini untuk memverifikasi email kamu.</p>
     <a href="{{ $link }}" class="btn btn-purple">Verifikasi Email Sekarang</a>
     <p class="mb-3"></p>
-    <p class="text-grey mb-3">Jika tombol tidak berfungsi, Anda juga bisa klik link berikut atau copy paste pada browser Anda</p>
+    <p class=" mb-3">Jika tombol tidak berfungsi, Anda juga bisa klik link berikut atau copy paste pada browser Anda</p>
     <a href="{{ $link }}" class="mb-3">{{ $link }}</a>
     <p>Kode verifikkasi ini akan berakhir dalam waktu 30 menit. Bila kode ini tidak berfungsi atau sudah berakhir masa berlakunya, silahkan lakukan kirim email verifikasi ulang.</p>
 </body>

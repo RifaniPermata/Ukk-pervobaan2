@@ -36,7 +36,7 @@
                         Verifikasi Email Berhasil
                     </div>
                     <div class="card-body">
-                        <p>Sekarang Anda bisa mengirimkan pengaduan di website PEKAT. Dan akun Anda sudah aman sekarang.
+                        <p>Sekarang Anda bisa mengirimkan pengaduan di website PERAKAT. Dan akun Anda sudah aman sekarang.
                         </p>
                         <a href="{{ route('view.index') }}" class="btn btn-purple">Masuk ke Akun</a>
                     </div>

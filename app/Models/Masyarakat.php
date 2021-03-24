@@ -16,17 +16,21 @@ class Masyarakat extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
     	'nik',
     	'nama',
-        'email',
     	'username',
     	'password',
     	'telp',
+        // 'jenis_kelamin',
+        'email',
+        'email_verified_at',
+        'provider_id',
+        'provider',
 
     ];
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
- 	protected $cast = [
-        'email_verified_at'=>'dateTime',
-    ];
+    // protected $hidden = [
+    //     'password', 'remember_token',
+    // ];
+ 	// protected $cast = [
+  //       'email_verified_at'=>'dateTime',
+  //   ];
 
 }

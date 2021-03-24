@@ -30,10 +30,8 @@ class laporanMasyarakat extends Controller
             $data['foto'] = $request->file('foto')->store('assets/pengaduan', 'public');
         }
 
-        date_default_timezone_set('Asia/Bangkok');
-
         $pengaduan = Pengaduan::create([
-            'tgl_pengaduan' => date('Y-m-d h:i:s'),
+            'tgl_pengaduan' => \Carbon\Carbon::now(),
             'nik' => Auth::guard('masyarakat')->user()->nik,
             'isi_laporan' => $data['isi_laporan'],
              'lokasi_kejadian' => $data['lokasi_kejadian'],
@@ -65,9 +63,12 @@ class laporanMasyarakat extends Controller
 
             return view('masyarakat.laporan', ['pengaduan' => $pengaduan, 'hitung' => $hitung, 'siapa' => $siapa]);
         } else {
-            $pengaduan = Pengaduan::where([['nik', '!=', Auth::guard('masyarakat')->user()->nik], ['status', '!=', '0']])->orderBy('tgl_pengaduan', 'desc')->get();
+            // $pengaduan = Pengaduan::where([['nik', '!=', Auth::guard('masyarakat')->user()->nik], ['status', '!=', '0']])->orderBy('tgl_pengaduan', 'desc')->get();
+            $pengaduan = Pengaduan::orderBy('tgl_pengaduan', 'desc')->get();
 
+            // return view('masyarakat.laporan', ['pengaduan' => $pengaduan, 'hitung' => $hitung, 'siapa' => $siapa]);
             return view('masyarakat.laporan', ['pengaduan' => $pengaduan, 'hitung' => $hitung, 'siapa' => $siapa]);
+
         }
     }
 }

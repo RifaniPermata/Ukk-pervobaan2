@@ -48,16 +48,17 @@
           </ul>
 
           <div >
+
           	 @if(Auth::guard('masyarakat')->check())
-              <div class="d-inline">
-                <a href="{{ route('view.index') }}" class="btn text-white">Home</a>             
-             </div>
-          	 <div class="d-inline">
-                <a href="{{ route('laporan') }}" class="btn text-white">Laporan</a>          	 	
-          	 </div>
-          	  <div class="d-inline">
-                <a href="{{ route('logout') }}" class="btn text-white">{{ Auth::guard('masyarakat')->user()->nama }}</a>      	 	
-          	 </div>
+            <div class="d-inline dropdown">
+                <a href="#" class="btn text-white dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"  aria-expanded="false">{{ Auth::guard('masyarakat')->user()->nama }}</a>  
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a href="{{ route('view.index') }}" class="dropdown-item"><i class="fa fa-home mr-1"></i>Home</a>       
+                    <a href="{{ route('laporan') }}" class="dropdown-item"><i class="fa fa-bullhorn mr-1"></i>Laporan</a>             
+                      <hr class="dropdown-divider">
+                      <a class="dropdown-item" href="{{ route('logout') }}"><i class="fa fa-sign-out mr-1"></i>Log Out</a>   
+                 </div>
+            </div>
           	 @else
             {{-- @guest --}}
               <div class="d-inline">
@@ -89,7 +90,7 @@
         <div class="jumbotron" style="background-image: url({{asset('assets/images/bg.jpg')}}); min-height: 550px; background-position: center;">
             <div class="text-center mt-5 container">
                       <h1 class="medium text-white">Layanan Pengaduan Masyarakat Online</h1>
-                      <h5 class="italic text-white mb-5 " style="color: #fff !important">Selamat Datang,{{ Auth::guard('masyarakat')->user()->nama }}. Sampaikan keluhan anda langsung kepada pihak berwenang</h5>
+                      <h5 class="italic text-white mb-5 " style="color: #fff !important">Selamat Datang,{{ Auth::guard('masyarakat')->user()->nama }}. Di website pengaduan layanan masyarakat kecamatan Pagaden.<br>Sampaikan keluhan anda langsung kepada pihak berwenang</h5>
                   </div>
         </div>
     </section>
@@ -110,12 +111,11 @@
                 <div class="card p-3 mb-4 card-header mt-2 text-center"><b>TULIS LAPORAN DISINI</div>
                 <form action="{{ route('pengaduan') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group">
+                    <div class="form-group row">
                         <input type="file" name="foto" class="form-control pb-2">
                     </div>
                     <div class="form-group pt-2">
-                        <textarea name="lokasi_kejadian" id="latlang" rows="3" class="form-control mb-3"
-                            placeholder="Lokasi Kejadian">{{ old('lokasi_kejadian') }}</textarea>
+                        <textarea name="lokasi_kejadian" id="latlang" rows="3" class="form-control mb-3" placeholder="Lokasi Kejadian" required>{{ old('lokasi_kejadian') }}</textarea>
                     </div>
                     <div class="form-group pt-2">
                         <div class="input-group mb-3">
@@ -127,8 +127,7 @@
                         </div>
                     </div>
                     <div class="form-group pt-2">
-                        <textarea name="isi_laporan" placeholder="Masukkan Isi Laporan" class="form-control"
-                            rows="4">{{ old('isi_laporan') }}</textarea>
+                        <textarea name="isi_laporan" placeholder="Masukkan Isi Laporan" class="form-control" rows="4" required>{{ old('isi_laporan') }}</textarea>
                     </div>
                     <button type="submit" class="btn btn-block btn-success mt-2">Kirim</button>
                 </form>
@@ -183,24 +182,18 @@
                 <img src="{{ asset('assets/images/user_default.svg') }}" alt="profile" class="profile">
                 <div class="d-flex justify-content-between">
                     <div class="">
-                            <p>{{ $v->user->nama }}</p>
-                        <div class="row ">
-                            <div class="d-inline p-2">
-                                @if ($v->status == '0')
-                                    <p class="text-danger">Pending</p>
-                                @elseif($v->status == 'proses')
-                                    <p class="text-warning">{{ ucwords($v->status) }}</p>
-                                @else
-                                    <p class="text-success">{{ ucwords($v->status) }}</p>
-                                @endif
-                            </div>
-                            <div class="d-inline p-2">
+                            <p class="mb-0">{{ $v->user->nama }}</p>
+                            @if ($v->status == '0')
+                                <span class="text-danger">Pending</span>
+                            @elseif($v->status == 'proses')
+                                <span class="text-warning">{{ ucwords($v->status) }}</span>
+                            @else
+                                <span class="text-success">{{ ucwords($v->status) }}</span>
+                            @endif
                                 <p>{{ $v->lokasi_kejadian }}</p>
-                            </div>
-                        </div>
                     </div>
                     <div>
-                        <p>{{ $v->tgl_pengaduan->format('d M, h:i') }}</p>
+                        <p>{{ $v->tgl_pengaduan->diffForHumans() }}</p>
                     </div>
                 </div>
             </div>
@@ -226,9 +219,9 @@
     </div>
 </div>
 {{-- Footer --}}
-	<footer class="text-center p-4 text-white bg-secondary ml-auto">
+{{-- 	<footer class="text-center p-4 text-white bg-secondary ml-auto">
       © 2021 PERAKAT | By
       <a href="#" class="text-blue-200" target="_blank">Rifani</a>
-    </footer>
+    </footer> --}}
     @endsection
 

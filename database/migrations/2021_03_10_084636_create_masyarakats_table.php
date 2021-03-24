@@ -19,8 +19,13 @@ class CreateMasyarakatsTable extends Migration
             $table->string('username',25);
             $table->string('password');
             $table->string('telp',13);
+            // $table->enum('jenis_kelamin',['pr','lk']);            
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->dateTime('email_verified_at')->nullable();
+
+            $table->string('provider_id')->nullable();
+            $table->string('provider')->nullable();
+            // $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
 
 

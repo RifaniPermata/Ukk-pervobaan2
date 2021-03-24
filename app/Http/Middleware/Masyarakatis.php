@@ -18,9 +18,12 @@ class Masyarakatis
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::guard('masyarakat')->check()) {
-            return $next($request);
+        $cek = Auth::guard('masyarakat')->check() && Auth::guard('masyarakat')->user()->email_verified_at == null;
+        if (!$cek){          
+          return $next($request);
+        }else{
+          return redirect('/');    
         }
 
-        return redirect('/');    }
+    }
 }

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Masyarakat\laporanMasyarakat;
+use App\Http\Controllers\Masyarakat\EmailController;
 use App\Http\Controllers\Masyarakat\SocialController;
 use App\Http\Controllers\Admin\PengaduanController;
 use App\Http\Controllers\Admin\PetugasController;
@@ -28,22 +29,31 @@ use App\Http\Controllers\Admin\TanggapanController;
 // Route::get('/', function () {
 //     return view('index');
 // });
-// Route::post('/masyarakat/sendverification', [LoginController::class, 'sendVerification'])->name('sendVerification');
-// Route::get('/masyarakat/verify/{nik}', [LoginController::class, 'verify'])->name('verify');
 
+Route::view('coba','coba');
 Route::get('/', [LoginController::class, 'index'])->name('view.index');
 Route::post('/register', [LoginController::class,'register'])->name('formRegister');
 
+// email verify
+Route::post('/masyarakat/sendverification', [EmailController::class, 'sendVerification'])->name('pekat.sendVerification');
+Route::get('/masyarakat/verify/{nik}', [EmailController::class, 'verify'])->name('pekat.verify');
+
 Route::post('/login', [LoginController::class,'login'])->name('login');
-// Route::get('/login/{provider}', [SocialController::class,'redirectToProvider']);
-// Route::get('login/{provider}/callback', [SocialController::class, 'handleProviderCallback']);
+// sosial
+Route::get('login/{provider}', [SocialController::class,'redirectToProvider'])->name('social.login');
+Route::get('login/{provider}/callback', [SocialController::class,'handleProviderCallback'])->name('social.callback');
 
 // Route::get('/login/{provider}/callback', [SocialController::class,'redirectToProvider']);
 
-Route::post('/Pengaduan', [laporanMasyarakat::class,'storePengaduan'])->name('pengaduan');
-Route::get('/laporan/{siapa?}', [laporanMasyarakat::class,'laporan'])->name('laporan');
+    Route::middleware(['masyarakatis'])->group(function(){
+        Route::post('/Pengaduan', [laporanMasyarakat::class,'storePengaduan'])->name('pengaduan');
+        Route::get('/laporan/{siapa?}', [laporanMasyarakat::class,'laporan'])->name('laporan');
+    });   
 
 Route::get('/logout', [loginController::class,'logout'])->name('logout');
+// google
+
+
 
 Route::prefix('admin')->group(function(){
 	Route::group(['middleware'=> ['auth:admin','cekLevel:admin']],function()

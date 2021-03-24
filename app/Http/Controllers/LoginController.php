@@ -6,9 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Masyarakat;
 use App\Models\Pengaduan;
 use App\Models\Petugas;
+use App\Mail\VerifikasiEmailUntukRegistrasiPengaduanMasyarakat;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\URL;
+
 
 class LoginController extends Controller
 {
@@ -69,21 +73,32 @@ class LoginController extends Controller
     public function register(Request $request)
     {
         $data = $request->all();
-
-        $validate = Validator::make($data, [
-            'nik' => ['required'],
+        $validated = $request->validate([
+            'nik' => ['required','size:16'],
             'nama' => ['required'],
             'email' => ['required'],
-            'username' => ['required'],
-            'password' => ['required'],
+            'username_register' => ['required'],
+            // 'register_password' => ['required','confirmed'],
+            'register_password' => ['required'],
             'telp' => ['required'],
+
         ]);
+        // $validate = Validator::make($data, [
+        //     'nik' => ['required'],
+        //     'nama' => ['required'],
+        //     'email' => ['required'],
+        //     'username' => ['required'],
+        //     'password' => ['required'],
+        //     'telp' => ['required'],
+        //     // 'jenis_kelamin' => ['required'],
 
-        if ($validate->fails()) {
-            return redirect()->back()->with(['pesan' => $validate->errors()]);
-        }
+        // ]);
 
-        $username = Masyarakat::where('username', $request->username)->first();
+        // if ($validate->fails()) {
+        //     return redirect()->back()->with(['pesan' => $validate->errors()]);
+        // }
+
+        $username = Masyarakat::where('username', $request->username_register)->first();
 
         if ($username) {
             return redirect()->back()->with(['pesan' => 'Username sudah terdaftar']);
@@ -93,12 +108,20 @@ class LoginController extends Controller
             'nik' => $data['nik'],
             'nama' => $data['nama'],
             'email' => $data['email'],
-            'username' => $data['username'],
-            'password' => Hash::make($data['password']),
+            'username' => $data['username_register'],
+            'password' => Hash::make($data['register_password']),
             'telp' => $data['telp'],
+            // 'jenis_kelamin' => $data['jenis_kelamin'],
+            
         ]);
+        // Kirim link verifikasi email
+        $link = URL::temporarySignedRoute('pekat.verify', now()->addMinutes(30), ['nik' => $data['nik']]);
+        Mail::to($data['email'])->send(new VerifikasiEmailUntukRegistrasiPengaduanMasyarakat($data['nama'], $link));
 
-       return redirect()->back()->with(['berhasil' => 'Data sudah berhasil,Silahkan Login!!']);
+        // return redirect()->view()
+       // return redirect()->back();
+
+       return redirect()->back()->with(['berhasil' => 'Data sudah berhasil,Silahkan Login dengan akun yang telah didaftarkan!!']);
     }
     
     //     public function sendVerification()
