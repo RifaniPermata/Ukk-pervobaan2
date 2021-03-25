@@ -18,15 +18,24 @@ class Ceklevel
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, $cek = null)
     {
-        if(Auth::guard('admin')->check() && Auth::guard('admin')->user()->level =='admin'){
+        if(!$cek){
+            if(Auth::guard('admin')->check() && Auth::guard('admin')->user()->level =='admin'){
             return $next($request);
-        
-        }elseif(Auth::guard('admin')->check() && Auth::guard('admin')->user()->level =='petugas'){
-            return $next($request);
+            
+            }elseif(Auth::guard('admin')->check() && Auth::guard('admin')->user()->level =='petugas'){
+                return $next($request);
 
+            }    
+        } else if ($cek == 'admin') {
+            if(Auth::guard('admin')->check()){
+                return redirect()->route('dasboard.index');
+            } else {
+                return $next($request);
+            }
         }
+        
         return redirect('/');
     }
     //   public function handle(Request $request, Closure $next, ...$levels)

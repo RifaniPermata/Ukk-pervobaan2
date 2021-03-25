@@ -19,11 +19,11 @@ class CreateTanggapansTable extends Migration
             $table->dateTime('tgl_tanggapan');
             $table->text('tanggapan');
             $table->unsignedBigInteger('id_petugas');
-
+            $table->softDeletes();
             $table->timestamps();
             
-            $table->foreign('id_pengaduan')->references('id_pengaduan')->on('pengaduans');
-            $table->foreign('id_petugas')->references('id_petugas')->on('petugas');
+            $table->foreign('id_pengaduan')->references('id_pengaduan')->on('pengaduans')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_petugas')->references('id_petugas')->on('petugas')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

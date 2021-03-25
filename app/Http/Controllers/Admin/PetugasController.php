@@ -80,4 +80,13 @@ class PetugasController extends Controller
         return redirect()->route('petugas.index');
         
     }
+
+    //     public function permanentdestroy($id_petugas){
+    //     $petugas = Petugas::findOrFail($id_petugas);
+
+    //     $petugas->forceDelete();
+
+    //     return redirect()->route('petugas.index');
+        
+    // }
 }

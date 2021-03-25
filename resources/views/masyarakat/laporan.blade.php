@@ -177,43 +177,59 @@
             <hr>
         </div>
         @foreach ($pengaduan as $k => $v)
-        <div class="col-lg-8 card mb-2 pb-4">
-            <div class="laporan-top">
-                <img src="{{ asset('assets/images/user_default.svg') }}" alt="profile" class="profile">
-                <div class="d-flex justify-content-between">
-                    <div class="">
-                            <p class="mb-0">{{ $v->user->nama }}</p>
-                            @if ($v->status == '0')
-                                <span class="text-danger">Pending</span>
-                            @elseif($v->status == 'proses')
-                                <span class="text-warning">{{ ucwords($v->status) }}</span>
-                            @else
-                                <span class="text-success">{{ ucwords($v->status) }}</span>
-                            @endif
-                                <p>{{ $v->lokasi_kejadian }}</p>
+        <div class="col-lg-8 clearfix">
+            <div class="card p-3 mb-2">
+                <div class="laporan-top">
+                    <img src="{{ asset('assets/images/user_default.svg') }}" alt="profile" class="profile">
+                    <div class="d-flex justify-content-between">
+                        <div class="">
+                                <p class="mb-0">{{ $v->user->nama }}</p>
+                                @if ($v->status == '0')
+                                    <span class="text-danger">Pending</span>
+                                @elseif($v->status == 'proses')
+                                    <span class="text-warning">{{ ucwords($v->status) }}</span>
+                                @else
+                                    <span class="text-success">{{ ucwords($v->status) }}</span>
+                                @endif
+                                    <p>{{ $v->lokasi_kejadian }}</p>
+                        </div>
+                        <div>
+                            <p>{{ $v->tgl_pengaduan->diffForHumans() }}</p>
+                        </div>
                     </div>
+                </div>
+                <div class="laporan-mid">
+                    <div class="judul-laporan">
+                        {{ $v->judul_laporan }}
+                    </div>
+                    <p>{{ $v->isi_laporan }}</p>
+                </div>
+                <div class="laporan-bottom">
+                    @if ($v->foto != null)
+                    <center>
+                        <img src="{{ Storage::url($v->foto) }}" style="max-width: 441px" width="90%" alt="{{ 'Gambar '.$v->judul_laporan }}" class="gambar-lampiran">
+                    </center>
+                    @endif
+                </div>
+            </div>
+
+            @if ($v->tanggapan != null)
+            <div class="float-right" style="width: 90%">
+                <div class="card mb-2 p-2 admin-">
                     <div>
-                        <p>{{ $v->tgl_pengaduan->diffForHumans() }}</p>
+                        @if($v->tanggapan->petugas->level == 'admin')
+
+                         <img src="{{ asset('assets/dist/img/user.jpeg') }}" alt="user profile" class="photo d-inline mb-2" style="max-width: 50px; max-height: 50px">
+                        @else
+                            <img src="{{ asset('assets/dist/img/petugas.png') }}" alt="user profile" class="photo d-inline mb-2" style="max-width: 50px; max-height: 50px">
+                        @endif
+                        <span class="">{{ $v->tanggapan->petugas->nama_petugas }}</span>
                     </div>
+                    <p class="pl-2">{{ $v->tanggapan->tanggapan }}</p>
                 </div>
             </div>
-            <div class="laporan-mid">
-                <div class="judul-laporan">
-                    {{ $v->judul_laporan }}
-                </div>
-                <p>{{ $v->isi_laporan }}</p>
-            </div>
-            <div class="laporan-bottom">
-                @if ($v->foto != null)
-                <center>
-                    <img src="{{ Storage::url($v->foto) }}" style="max-width: 441px" width="90%" alt="{{ 'Gambar '.$v->judul_laporan }}" class="gambar-lampiran">
-                </center>
-                @endif
-                @if ($v->tanggapan != null)
-                <p class="mt-3 mb-1">{{ '*Tanggapan dari '. $v->tanggapan->petugas->nama_petugas }}</p>
-                <p class="light">{{ $v->tanggapan->tanggapan }}</p>
-                @endif
-            </div>
+            @endif
+
         </div>
         @endforeach
     </div>

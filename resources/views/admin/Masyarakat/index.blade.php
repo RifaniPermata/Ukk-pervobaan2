@@ -37,7 +37,7 @@
 										
 										<td class="text-center">
 											<button class="btn btn-info">
-											<a href="{{route('masyarakat.show', $v->nik)}}" class="text-dark"><i class="fas fa-eye"></i> Lihat</a>
+											<a href="{{route('masyarakat.show', $v->nik)}}" class="text-white"><i class="fas fa-eye"></i> Lihat</a>
 											</button>
 										</td>
 									</tr>

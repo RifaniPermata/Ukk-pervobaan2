@@ -64,7 +64,7 @@
 													@endif
 												</td>
 											</tr>
-										@endforeach
+                                        @endforeach                                            
 									</tbody>
 								</table>
 							@else

@@ -2,15 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-// use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
+// use Illuminate\Database\Eloquent\Model;
 
 class Masyarakat extends Authenticatable implements MustVerifyEmail
 {
+    use SoftDeletes;
+
     use HasFactory, Notifiable;
+
     protected $primaryKey = 'nik';
 
     protected $fillable = [

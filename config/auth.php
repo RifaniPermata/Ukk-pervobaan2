@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'masyarakat',
+        'passwords' => 'masyarakats',
     ],
 
     /*
@@ -36,10 +36,10 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
+        // 'web' => [
+        //     'driver' => 'session',
+        //     'provider' => 'users',
+        // ],
         'masyarakat' => [
             'driver' => 'session',
             'provider' => 'masyarakats',
@@ -55,7 +55,7 @@ return [
 
         'api' => [
             'driver' => 'token',
-            'provider' => 'users',
+            'provider' => 'admins',
             'hash' => false,
         ],
     ],
@@ -78,10 +78,10 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ],
+        // 'users' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\User::class,
+        // ],
         'masyarakats' => [
             'driver' => 'eloquent',
             'model' => App\Models\Masyarakat::class,
@@ -90,7 +90,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Petugas::class,
         ],
-          'Petugass' => [
+        'Petugass' => [
             'driver' => 'eloquent',
             'model' => App\Models\Petugas::class,
         ],
@@ -117,8 +117,20 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'masyarakats' => [
+            'provider' => 'masyarakats',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'Petugass' => [
+            'provider' => 'Petugass',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

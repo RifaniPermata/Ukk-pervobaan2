@@ -22,10 +22,10 @@ class CreatePengaduansTable extends Migration
             $table->enum('kategori_kejadian', ['jalan', 'bansos']);
             $table->string('foto');
             $table->enum('status',['0','proses','selesai']);
-
+            $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('nik')->references('nik')->on('masyarakats');
+            $table->foreign('nik')->references('nik')->on('masyarakats')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

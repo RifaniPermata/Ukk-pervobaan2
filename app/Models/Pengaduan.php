@@ -2,17 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-// use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Masyarakat;
 use App\Models\Tanggapan;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-
-
+// use Illuminate\Database\Eloquent\Model;
 
 class Pengaduan extends Authenticatable
 {
+    use SoftDeletes;
+    
     use HasFactory;
+
     protected $primaryKey = 'id_pengaduan';
 
     protected $fillable = [
@@ -24,6 +26,7 @@ class Pengaduan extends Authenticatable
 		'foto',
 		'status',   
     ];
+    
     protected  $dates = ['tgl_pengaduan'];
 
     public function user(){

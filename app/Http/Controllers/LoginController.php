@@ -78,8 +78,8 @@ class LoginController extends Controller
             'nama' => ['required'],
             'email' => ['required'],
             'username_register' => ['required'],
-            // 'register_password' => ['required','confirmed'],
-            'register_password' => ['required'],
+            'register_password' => ['required','confirmed'],
+            // 'register_password' => ['required'],
             'telp' => ['required'],
 
         ]);

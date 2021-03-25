@@ -41,7 +41,7 @@
 										
 										<td class="text-center">
 											<button class="btn btn-info">
-											<a href="{{route('petugas.edit', $v->id_petugas)}}" class="text-dark"><i class="fas fa-eye"></i> Lihat</a>
+											<a href="{{route('petugas.edit', $v->id_petugas)}}" class="text-white"><i class="fas fa-eye"></i> Lihat</a>
 											</button>
 										</td>
 									</tr>

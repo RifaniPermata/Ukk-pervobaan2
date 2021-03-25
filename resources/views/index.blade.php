@@ -63,7 +63,7 @@
                 <a href="{{ route('view.index') }}" class="dropdown-item"><i class="fa fa-home mr-1"></i>Home</a>       
                 <a href="{{ route('laporan') }}" class="dropdown-item"><i class="fa fa-bullhorn mr-1"></i>Laporan</a>             
                   <hr class="dropdown-divider">
-                  <a class="dropdown-item" href="{{ route('logout') }}"><i class="fa fa-sign-out mr-1"></i>Log Out</a>   
+                  <a class="dropdown-item" href="{{ route('logout') }}"><i class="fa fa-sign-out mr-1"></i>Keluar</a>   
              </div>
              {{-- <li><a class="dropdown-item" href="#">Action</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
@@ -195,7 +195,7 @@
                       	<div class="col-md-6">
                           <div class="form-group">
                             <label for="password-confirm" style="color: #fff !important">Konfirmasi Password</label>
-                            <input id="password-confirm" type="password" class="form-control" required name="password_confirmation" required autocomplete="new-password" placeholder="********">
+                            <input id="password-confirm" type="password" class="form-control" required name="register_password_confirmation" required autocomplete="new-password" placeholder="********">
                           </div>
                       	</div>
                   	</div>
@@ -214,7 +214,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title container" id="exampleModalLabel">Login</h5>
+                    <h5 class="modal-title container" id="exampleModalLabel">Masuk</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

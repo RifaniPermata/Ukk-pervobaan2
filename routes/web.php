@@ -29,9 +29,7 @@ use App\Http\Controllers\Admin\TanggapanController;
 // Route::get('/', function () {
 //     return view('index');
 // });
-
-Route::view('coba','coba');
-Route::get('/', [LoginController::class, 'index'])->name('view.index');
+Route::middleware('cekLevel:admin')->get('/', [LoginController::class, 'index'])->name('view.index');
 Route::post('/register', [LoginController::class,'register'])->name('formRegister');
 
 // email verify
@@ -47,7 +45,7 @@ Route::get('login/{provider}/callback', [SocialController::class,'handleProvider
 
     Route::middleware(['masyarakatis'])->group(function(){
         Route::post('/Pengaduan', [laporanMasyarakat::class,'storePengaduan'])->name('pengaduan');
-        Route::get('/laporan/{siapa?}', [laporanMasyarakat::class,'laporan'])->name('laporan');
+        Route::middleware('masyarakatis:masyarakat')->get('/laporan/{siapa?}', [laporanMasyarakat::class,'laporan'])->name('laporan');
     });   
 
 Route::get('/logout', [loginController::class,'logout'])->name('logout');
@@ -68,7 +66,7 @@ Route::prefix('admin')->group(function(){
 	});
 
 // });
-	Route::group(['middleware'=> ['auth:admin','cekLevel:admin,petugas']],function()
+	Route::group(['middleware'=> ['auth:admin','cekLevel']],function()
 	{
 	// Route::middleware(['petugasMiddleware'])->group(function(){
 		Route::resource('masyarakat', MasyarakatController::class);

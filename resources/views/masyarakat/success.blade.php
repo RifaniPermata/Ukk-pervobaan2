@@ -1,35 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.LayoutIndex')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-
-    <style>
-        .btn-purple {
-            background: #6a70fc;
-            border: 1px solid #6a70fc;
-            color: #fff;
-        }
-
-        .btn-purple:hover {
-            background: #6a70fc;
-            border: 1px solid #6a70fc;
-            color: #fff;
-        }
-
+@section('css')
+    <link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css">
+    <style type="text/css">
+      .margin{
+          margin-top: -150px;
+      }
+      .mg{
+        margin-top: -50px;
+      }
     </style>
+@endsection
 
-    <title>Verifikasi Email Berhasil</title>
-</head>
+@section('title', 'PERAKAT - Pengaduan Masyarakat')
 
-<body>
-    <div class="container">
-        <div class="row justify-content-center">
+@section('content')
+{{-- Section Header --}}
+
+<section class="header">
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top container" id="navbar" style="background: #cb4c3c !important">
+
+        <a class="navbar-brand" href="#"><img src="{{ config('app.url') }}/assets/images/logo.png" style="max-width: 50px"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <p class="nav-link text-white" style="font-size: 1rem;"><b>PERAKAT</b><br> Pengaduan masyarakat</p>
+            </li>
+
+          </ul>
+        </div>
+  </nav>
+
+</section>
+
+
+{{-- Section Card Pengaduan --}}
+ <main>
+    <section>
+
+          <div class="jumbotron mb-0 rounded-0" style="background-image: url('{{config('app.url')}}/assets/images/bg.jpg');background-position:center;min-height: 640px;">
+            <div class="row justify-content-center" style="margin-top: 100px">
             <div class="col-lg-6 col-12">
                 <div class="card">
                     <div class="card-header">
@@ -38,12 +53,16 @@
                     <div class="card-body">
                         <p>Sekarang Anda bisa mengirimkan pengaduan di website PERAKAT. Dan akun Anda sudah aman sekarang.
                         </p>
-                        <a href="{{ route('view.index') }}" class="btn btn-purple">Masuk ke Akun</a>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ route('view.index') }}" class="float-right btn btn-primary">Masuk ke Akun</a>
+                        
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</body>
-
-</html>
+          </div>
+    </section>
+</main>
+  
+@endsection

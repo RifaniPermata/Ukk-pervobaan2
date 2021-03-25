@@ -16,14 +16,24 @@ class Masyarakatis
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, $masyarakat = null)
     {
-        $cek = Auth::guard('masyarakat')->check() && Auth::guard('masyarakat')->user()->email_verified_at == null;
-        if (!$cek){          
-          return $next($request);
-        }else{
-          return redirect('/');    
+        if(!$masyarakat){
+            $cek = Auth::guard('masyarakat')->check() && Auth::guard('masyarakat')->user()->email_verified_at == null;
+            if (!$cek){          
+              return $next($request);
+            }else{
+              return redirect('/');    
+            }
+        } else if($masyarakat = 'masyarakat'){
+            $cek = Auth::guard('masyarakat')->check();
+            if(!$cek){
+                return redirect('/'); 
+            } else {
+                return $next($request);
+            }
         }
+        
 
     }
 }
