@@ -8,6 +8,11 @@ use App\Models\Masyarakat;
 
 class MasyarakatController extends Controller
 {
+	public function __construct()
+    {
+        $this->middleware('cekLevel:admin,petugas');
+    }
+    
     public function index(){
    	$masyarakat =Masyarakat::all();
 

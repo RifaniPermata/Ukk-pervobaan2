@@ -13,7 +13,7 @@ class CreatePengaduansTable extends Migration
      */
     public function up()
     {
-        Schema::create('pengaduans', function (Blueprint $table) {
+        Schema::create('pengaduan', function (Blueprint $table) {
             $table->id('id_pengaduan');
             $table->dateTime('tgl_pengaduan');
             $table->char('nik',16);
@@ -25,7 +25,7 @@ class CreatePengaduansTable extends Migration
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('nik')->references('nik')->on('masyarakats')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('nik')->references('nik')->on('masyarakat')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -36,6 +36,6 @@ class CreatePengaduansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pengaduans');
+        Schema::dropIfExists('pengaduan');
     }
 }

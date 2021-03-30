@@ -2,18 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+// use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Masyarakat;
-use App\Models\Tanggapan;
-// use Illuminate\Database\Eloquent\Model;
+// use App\Models\Masyarakat;
+// use App\Models\Tanggapan;
+use Illuminate\Database\Eloquent\Model;
 
-class Pengaduan extends Authenticatable
+class Pengaduan extends Model
 {
     use SoftDeletes;
     
     use HasFactory;
+    protected $table = 'pengaduan';
 
     protected $primaryKey = 'id_pengaduan';
 

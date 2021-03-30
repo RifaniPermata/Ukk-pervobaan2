@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Validator;
 
 class PetugasController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware('cekLevel:petugas');
+    }
+    
     public function index(){
     	$petugas =Petugas::all();
 

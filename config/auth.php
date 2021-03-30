@@ -48,7 +48,7 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
-        'Petugas' => [
+        'petugas' => [
             'driver' => 'session',
             'provider' => 'Petugass',
         ],

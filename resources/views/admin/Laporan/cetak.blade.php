@@ -23,6 +23,10 @@
                         <th>No</th>
                         <th>Tanggal</th>
                         <th>Isi Laporan</th>
+                        <th>Lokasi Kejadian</th>
+                        <th>Tanggapan Dari</th>
+                        <th>Tanggal Tanggapan</th>
+                        <th>Isi Tanggapan</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -32,6 +36,10 @@
                             <td>{{ $k += 1 }}</td>
                             <td>{{ $v->tgl_pengaduan->format('d-M-Y') }}</td>
                             <td>{{ $v->isi_laporan }}</td>
+                            <td>{{ $v->lokasi_kejadian }}</td>
+                            <td>{{ $v->tanggapan->petugas->level ?? '' }}</td>
+                            <td>{{ $v->tanggapan->tgl_tanggapan ?? '' }}</td>
+                            <td>{{ $v->tanggapan->tanggapan ?? '' }}</td>
                             <td>{{ $v->status == '0' ? 'Pending' : ucwords($v->status) }}</td>
                         </tr>
                     @endforeach

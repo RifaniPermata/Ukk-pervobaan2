@@ -14,6 +14,8 @@ class Masyarakat extends Authenticatable implements MustVerifyEmail
     use SoftDeletes;
 
     use HasFactory, Notifiable;
+    protected $table = 'masyarakat';
+
 
     protected $primaryKey = 'nik';
 

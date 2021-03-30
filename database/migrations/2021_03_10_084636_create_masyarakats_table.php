@@ -13,7 +13,7 @@ class CreateMasyarakatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('masyarakats', function (Blueprint $table) {
+        Schema::create('masyarakat', function (Blueprint $table) {
             $table->char('nik',16)->primary();
             $table->string('nama',35);
             $table->string('username',25);
@@ -41,6 +41,6 @@ class CreateMasyarakatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('masyarakats');
+        Schema::dropIfExists('masyarakat');
     }
 }

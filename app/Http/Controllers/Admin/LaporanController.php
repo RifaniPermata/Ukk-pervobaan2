@@ -13,7 +13,14 @@ use PDF;
 
 class LaporanController extends Controller
 {
+	public function __construct()
+    {
+        $this->middleware('cekLevel:admin');
+    }
+    
     public function index(){
+    	// dd(1);
+	 	// $pengaduan = Pengaduan::all();
 
 		return view('admin.Laporan.index');
 	}
@@ -28,11 +35,13 @@ class LaporanController extends Controller
 
 		return view('admin.Laporan.index',['pengaduan'=>$pengaduan,'from'=>$from, 'to'=>$to]);
 	}
-	    public function cetakLaporan($from, $to)
+	public function cetakLaporan($from, $to)
     {
         $pengaduan = Pengaduan::whereBetween('tgl_pengaduan', [$from, $to])->get();
 
         $pdf = PDF::loadView('admin.Laporan.cetak', ['pengaduan' => $pengaduan]);
+        // $pdf = PDF::setPaper('a4','landscape')->loadView('admin.Laporan.cetak', ['pengaduan' => $pengaduan]);
+
         return $pdf->download('laporan-pengaduan.pdf');
     }
 }

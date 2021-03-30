@@ -11,6 +11,11 @@ use App\Models\Tanggapan;
 
 class PengaduanController extends Controller
 {
+	public function __construct()
+    {
+        $this->middleware('cekLevel:admin,petugas');
+    }
+    
      public function index(){
    		$pengaduan = Pengaduan::orderBy('tgl_pengaduan', 'desc')->get();
 

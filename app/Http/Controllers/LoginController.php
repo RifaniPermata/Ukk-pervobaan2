@@ -18,6 +18,9 @@ class LoginController extends Controller
 {
 	public function index()
     {
+        if(Auth::guard('admin')->check()){
+            return redirect()->route('dasboard.index');
+        }
         $pengaduanAll =Pengaduan::all()->count();
 
         return view('index',['pengaduanAll'=>$pengaduanAll]);
@@ -74,15 +77,15 @@ class LoginController extends Controller
     {
         $data = $request->all();
         $validated = $request->validate([
-            'nik' => ['required','size:16'],
+            'nik' => ['required','size:16', 'integer'],
             'nama' => ['required'],
             'email' => ['required'],
             'username_register' => ['required'],
             'register_password' => ['required','confirmed'],
-            // 'register_password' => ['required'],
             'telp' => ['required'],
 
         ]);
+        dd(1);
         // $validate = Validator::make($data, [
         //     'nik' => ['required'],
         //     'nama' => ['required'],
@@ -97,7 +100,7 @@ class LoginController extends Controller
         // if ($validate->fails()) {
         //     return redirect()->back()->with(['pesan' => $validate->errors()]);
         // }
-
+        dd((int)'123adsa');
         $username = Masyarakat::where('username', $request->username_register)->first();
 
         if ($username) {

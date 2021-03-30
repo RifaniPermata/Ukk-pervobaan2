@@ -234,10 +234,10 @@
         @endforeach
     </div>
 </div>
-{{-- Footer --}}
+<!-- {{-- Footer --}}
 {{-- 	<footer class="text-center p-4 text-white bg-secondary ml-auto">
       © 2021 PERAKAT | By
       <a href="#" class="text-blue-200" target="_blank">Rifani</a>
-    </footer> --}}
+    </footer> --}} -->
     @endsection
 

@@ -13,7 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([PetugasTableSeeder::class]);
+        $this->call(PetugasTableSeeder::class);
+        $this->call(MasyarakatTableSeeder::class);
         
     }
 }

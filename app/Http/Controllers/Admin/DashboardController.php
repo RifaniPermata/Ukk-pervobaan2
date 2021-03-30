@@ -10,6 +10,11 @@ use App\Models\Pengaduan;
 
 class DashboardController extends Controller
 {
+	public function __construct()
+    {
+        $this->middleware('cekLevel:admin,petugas');
+    }
+
     public function index(){
     $petugas =Petugas::all()->count();
    	$masyarakat =Masyarakat::all()->count();

@@ -13,7 +13,7 @@ class CreateTanggapansTable extends Migration
      */
     public function up()
     {
-        Schema::create('tanggapans', function (Blueprint $table) {
+        Schema::create('tanggapan', function (Blueprint $table) {
             $table->id('id_tanggapan');
             $table->unsignedBigInteger('id_pengaduan');
             $table->dateTime('tgl_tanggapan');
@@ -22,7 +22,7 @@ class CreateTanggapansTable extends Migration
             $table->softDeletes();
             $table->timestamps();
             
-            $table->foreign('id_pengaduan')->references('id_pengaduan')->on('pengaduans')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_pengaduan')->references('id_pengaduan')->on('pengaduan')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('id_petugas')->references('id_petugas')->on('petugas')->onUpdate('cascade')->onDelete('cascade');
         });
     }
@@ -34,6 +34,6 @@ class CreateTanggapansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tanggapans');
+        Schema::dropIfExists('tanggapan');
     }
 }

@@ -11,7 +11,12 @@ use Illuminate\Support\Facades\Auth;
 
 class TanggapanController extends Controller
 {
-     public function createOrUpdate(Request $request)
+    public function __construct()
+    {
+        $this->middleware('cekLevel:admin');
+    }
+    
+    public function createOrUpdate(Request $request)
     {
         $pengaduan = Pengaduan::where('id_pengaduan', $request->id_pengaduan)->first();
 

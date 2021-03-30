@@ -64,12 +64,12 @@
                 <a href="{{ route('laporan') }}" class="dropdown-item"><i class="fa fa-bullhorn mr-1"></i>Laporan</a>             
                   <hr class="dropdown-divider">
                   <a class="dropdown-item" href="{{ route('logout') }}"><i class="fa fa-sign-out mr-1"></i>Keluar</a>   
-              </div>
-          <!--    {{-- <li><a class="dropdown-item" href="#">Action</a></li>
+             </div>
+             {{-- <li><a class="dropdown-item" href="#">Action</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li> --}} -->
+            <li><a class="dropdown-item" href="#">Something else here</a></li> --}}
              @else
-            <!-- {{-- @guest --}} -->
+            {{-- @guest --}}
               <div class="d-inline">
                 <button class="btn d-inline text-white" data-toggle="modal" data-target="#loginModal">Masuk</button>
               </div>
@@ -77,15 +77,15 @@
                 <a href="{{ route('formRegister') }}" class="btn text-white">Daftar</a>
 
               </div>
-        <!-- {{--     @else
+        {{--     @else
               <div class="d-inline">
                 <a href="#" class="btn text-white" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">Logout</a>
                 <form id="logout-form" action="#" method="POST" class="d-none">
                   @csrf
                 </form>
-              </div> --}} -->
-            <!-- {{-- @endguest --}} -->
+              </div> --}}
+            {{-- @endguest --}}
              @endauth
             
             
@@ -137,7 +137,7 @@
                     @csrf
                     <div class="form-group">
                     	<label for="nik" style="color: #fff !important">NIK</label>
-                        <input id="nik" type="number" onkeypress="return Angka(event)" value="{{ old('nik') }}" pattern="[0-9]+" title="only letters" required name="nik" placeholder="NIK" class="form-control @error('nik') is-invalid @enderror">
+                        <input type="number"  value="{{ old('nik') }}" pattern="[0-9]+" title="only letters" required name="nik" placeholder="NIK" class="form-control @error('nik') is-invalid @enderror">
                         @error('nik')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -146,7 +146,7 @@
                     </div>
 	                <div class="form-group">
 	                    <label for="nama" style="color: #fff !important">Nama Lengkap</label>
-	                    <input id="nama" type="text" onkeypress="return Huruf(event)" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}"  autocomplete="name" pattern="[A-Za-z]+" title="letters only" required placeholder="Nama Lengkap" autofocus>
+	                    <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}"  autocomplete="name" pattern="[A-Za-z]+" title="letters only" required placeholder="Nama Lengkap" autofocus>
 	                    @error('nama')
 	                        <span class="invalid-feedback" role="alert">
 	                            <strong>{{ $message }}</strong>
@@ -173,7 +173,7 @@
                   	</div>
                   	<div class="form-group">
 	                	<label for="telp" style="color: #fff !important">No. Telp</label>
-                        <input id="telp" type="tel" onkeypress="return Angka(event)" name="telp"  value="{{ old('telp') }}" required placeholder="No. Telp" class="form-control @error('telp') is-invalid @enderror">
+                        <input type="number" name="telp"  value="{{ old('telp') }}" required placeholder="No. Telp" class="form-control @error('telp') is-invalid @enderror">
                         @error('telp')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -389,16 +389,7 @@
 @endsection
 
 @section('js')
-  
     <script>
-      function Angka(evt){
-        var charCode = (evt.which) ? evt.which : evt.keyCode
-        return !(charCode > 31 && (charCode < 48 || charCode > 57));
-      }
-      function Huruf(event) {
-        var key = event.keyCode;
-        return ((key >= 65 && key <= 90) || (event.keyCode > 96 && event.keyCode < 123) || key == 8);
-      };
 
       @error('username')
         $('#loginModal').modal('show')
@@ -410,21 +401,21 @@
       var prevScrollpos = window.pageYOffset;
        window.onscroll = function() {scrollFunction()};
 
-    function scrollFunction() {
-      var currentScrollPos = window.pageYOffset;
-      if (prevScrollpos > currentScrollPos) {
-      document.getElementById("navbar").style.top = "0";
-      // }if(document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-      //   document.getElementById("navbar").style.top = "0";
-      } else {
-        document.getElementById("navbar").style.top = "-150px";
-      }
-        prevScrollpos = currentScrollPos;
+  function scrollFunction() {
+    var currentScrollPos = window.pageYOffset;
+    if (prevScrollpos > currentScrollPos) {
+    document.getElementById("navbar").style.top = "0";
+    // }if(document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    //   document.getElementById("navbar").style.top = "0";
+    } else {
+      document.getElementById("navbar").style.top = "-150px";
     }
-    @if (Session::has('pesan'))
-     $('#loginModal').modal('show');
-    @elseif(Session::has('berhasil'))
-     $('#loginModal').modal('show');
+      prevScrollpos = currentScrollPos;
+  }
+  @if (Session::has('pesan'))
+   $('#loginModal').modal('show');
+   @elseif(Session::has('berhasil'))
+      $('#loginModal').modal('show');
     @endif
     </script>
    

@@ -12,6 +12,8 @@ class Tanggapan extends Model
     use SoftDeletes;
     
     use HasFactory;
+    protected $table = 'tanggapan';
+
 
     protected $primaryKey = 'id_tanggapan';
 
