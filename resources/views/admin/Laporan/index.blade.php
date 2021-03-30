@@ -16,15 +16,17 @@
 								<button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-search"></i> Cari Data</button>
 							</div>
 						</div>
-						<div class="card-body">
+						<div class="card-body table-responsive">
 							@if($pengaduan ?? '')
 								<table class="table table-striped table-bordered">
 									<thead class="text-center table-dark">
 										<tr>
 											<th>No</th>
-		                                    <th>Tanggal</th>
+											<th>Nama Masyarakat</th>
+		                                    <th>Tanggal Pengaduan</th>
 		                                    <th>Isi Laporan</th>
 		                                    <th>Lokasi Kejadian</th>
+		                                    <th>Nama Petugas</th>
 		                                    <th>Tanggapan Dari</th>
 		                                    <th>Tanggal Tanggapan</th>
 		                                    <th>Isi Tanggapan</th>
@@ -35,12 +37,14 @@
 										@foreach($pengaduan as $k => $v)
 											<tr>
 												<td>{{ $k += 1 }}</td>
-		                                        <td>{{ $v->tgl_pengaduan }}</td>
-		                                        <td>{{ $v->isi_laporan }}</td>
-		                                        <td>{{ $v->lokasi_kejadian }}</td>
+		                                        <td>{{ $v->user->nama }}</td>
+		                                        <td>{{ tanggalIndonesia($v->tgl_pengaduan) }}</td>
+		                                        <td style="max-width: 150px">{{ $v->isi_laporan }}</td>
+		                                        <td style="max-width: 150px">{{ $v->lokasi_kejadian }}</td>
+		                                        <td>{{ $v->tanggapan->petugas->nama_petugas ?? '' }}</td>
 		                                        <td>{{ $v->tanggapan->petugas->level ?? '' }}</td>
-		                                        <td>{{ $v->tanggapan->tgl_tanggapan ?? '' }}</td>
-		                                        <td>{{ $v->tanggapan->tanggapan ?? '' }}</td>
+		                                        <td>{{ tanggalIndonesia($v->tanggapan->tgl_tanggapan ?? '' ) }}</td>
+		                                        <td style="max-width: 150px">{{ $v->tanggapan->tanggapan ?? '' }}</td>
 												<td>
 													@if($v->status == '0')
 														<a href="#" class="badge badge-danger">Pending</a>
@@ -62,7 +66,7 @@
 						</div>
 						<div class="card-footer ">
 							<div class="float-right">
-								@if($pengaduan ?? '')
+								@if($pengaduan && $from)
 									<a href="{{route('export.laporan',['from'=>$from, 'to'=>$to])}}" class="btn btn-danger"><i class="fas fa-file-pdf"></i> Export Pdf</a>
 								@endif
 							</div>
@@ -87,7 +91,7 @@
 	      <div class="modal-header">
 	        <!-- <h5 class="modal-title" id="exampleModalLabel">Cari Data</h5> -->
 		        <div class="dropdown">
-				  <a class=" dropdown-toggle text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  <a class="dropdown-toggle text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				    Cari Berdasarkan
 				  </a>
 				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -101,7 +105,9 @@
 	      </div>
 	      <div class="modal-body">
 	        <div class="col-lg-8 col-12 container-fluid">
-				<div class="card">
+	      	<button id="searchByTanggal" class="btn btn-success">Tanggal</button>
+	      	<button id="searchByStatus" class="btn btn-success">Status</button>
+				<div class="card" id="tanggal-card">
 					<div class="card-header">
 						Cari Berdasarkan Tanggal
 					</div>
@@ -120,12 +126,12 @@
 				</div>
 			</div>
 			<div class="col-lg-8 col-12 container-fluid">
-				<div class="card">
+				<div class="card" id="status-card">
 					<div class="card-header">
 						Cari Berdasarkan Status
 					</div>
 					<div class="card-body">
-						<form action="{{route('cari.laporan')}}" method="POST">
+						<form action="{{route('cari.status')}}" method="POST">
 							@csrf
 							<select name="status" id="status" class="custom-select">
 									<option value="0">Pending</option>
@@ -142,17 +148,20 @@
 	  </div>
 	</div>
 
+
+@endsection
+@section('js')
 	<script>
 	   $(document).ready(function() {
-	  // if($(".hide").click(function(){
-		$(".hide").click(function(){
-		   $(".hide").hide();
-		});
-	  // }else{
-		// $(".show").click(function(){
-		//    $("form").show();
-		// });
-	  // }	  
+	   		$("#status-card").hide()
+			$("#searchByStatus").click(function(){
+				$("#status-card").show()
+				$("#tanggal-card").hide()
+			})
+			$("#searchByTanggal").click(function(){
+				$("#tanggal-card").show()
+				$("#status-card").hide()
+			}) 
 	   });
    </script>
 @endsection

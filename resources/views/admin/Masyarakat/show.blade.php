@@ -16,7 +16,7 @@
 						<div class="card-header text-center">
 							<b>Detail Masyarakat</b>
 						</div>
-						<div class="card-body">
+						<div class="card-body table-responsive">
 							<table class="table">
 								<tbody>
 									<tr>

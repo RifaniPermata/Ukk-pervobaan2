@@ -29,17 +29,25 @@ class LaporanController extends Controller
 		$from =$request->from .' '.'00:00:00';
 		$to =$request->to .' '.'23:59:59';
 
-
 		$pengaduan = Pengaduan::whereBetween('tgl_pengaduan',[$from, $to])->get();
 
 
 		return view('admin.Laporan.index',['pengaduan'=>$pengaduan,'from'=>$from, 'to'=>$to]);
 	}
+	public function status(Request $request){
+		$data = Pengaduan::where('status',$request->status);
+		$pengaduan = $data->get();
+		// dd($pengaduan);
+		$from = $data->first()->created_at;
+		// dd($from);
+		return view('admin.Laporan.index',['pengaduan'=>$pengaduan,'from'=>$from, 'to'=> \Carbon\Carbon::now()]);
+
+	}
 	public function cetakLaporan($from, $to)
     {
         $pengaduan = Pengaduan::whereBetween('tgl_pengaduan', [$from, $to])->get();
 
-        $pdf = PDF::loadView('admin.Laporan.cetak', ['pengaduan' => $pengaduan]);
+        $pdf = PDF::loadView('admin.Laporan.cetak', ['pengaduan' => $pengaduan])->setPaper('a4', 'landscape');
         // $pdf = PDF::setPaper('a4','landscape')->loadView('admin.Laporan.cetak', ['pengaduan' => $pengaduan]);
 
         return $pdf->download('laporan-pengaduan.pdf');

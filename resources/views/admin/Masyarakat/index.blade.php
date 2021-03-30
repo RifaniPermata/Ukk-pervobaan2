@@ -14,7 +14,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<div class=" card-body">
+						<div class=" card-body table-responsive">
 							<table id="masyarakatTable" class="table table-striped table-bordered" >
 						        <thead  class="table-dark text-center">
 									<tr>

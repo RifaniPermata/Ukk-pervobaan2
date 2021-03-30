@@ -54,7 +54,8 @@ Route::prefix('admin')->group(function(){
 
 		Route::get('/dashboard', [DashboardController::class, 'index'])->name('dasboard.index');
 		Route::get('laporan', [LaporanController::class, 'index'])->name('laporan.index');
-		Route::post('getLaporan',[LaporanController::class,'getLaporan'])->name('cari.laporan');
+		Route::post('getLaporanTanggal',[LaporanController::class,'getLaporan'])->name('cari.laporan');
+		Route::post('getLaporanStatus',[LaporanController::class,'status'])->name('cari.status');
 		Route::get('cetak/{from}/{to}',[LaporanController::class,'cetakLaporan'])->name('export.laporan');
 
 		Route::resource('petugas', PetugasController::class);
