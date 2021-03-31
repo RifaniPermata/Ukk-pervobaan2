@@ -223,10 +223,14 @@
                         @else
                             <img src="{{ asset('assets/dist/img/petugas.png') }}" alt="user profile" class="photo d-inline mb-2" style="max-width: 50px; max-height: 50px">
                         @endif
-                        <span class="">{{ $v->tanggapan->petugas->nama_petugas }}</span>
+                        <span class="">{{ $v->tanggapan->petugas->nama_petugas}}</span>
+                        <div class="float-right">
+                    <span>{{ $v->tanggapan->created_at->diffForHumans()}}<span>
+                 </div>
                     </div>
                     <p class="pl-2">{{ $v->tanggapan->tanggapan }}</p>
                 </div>
+                 
             </div>
             @endif
 

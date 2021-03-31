@@ -38,18 +38,29 @@ class LaporanController extends Controller
 		$data = Pengaduan::where('status',$request->status);
 		$pengaduan = $data->get();
 		// dd($pengaduan);
-		$from = $data->first()->created_at;
+		if($data->first()){
+			$from = $data->first()->created_at;
+
+		} else {
+			$from = \Carbon\Carbon::now();
+		}
+		// dd($data->first()->status);
 		// dd($from);
-		return view('admin.Laporan.index',['pengaduan'=>$pengaduan,'from'=>$from, 'to'=> \Carbon\Carbon::now()]);
+		return view('admin.Laporan.index',['pengaduan'=>$pengaduan,'from'=>$from, 'to'=> \Carbon\Carbon::now(),'statusExport' => $data->first()->status]);
 
 	}
-	public function cetakLaporan($from, $to)
+	public function cetakLaporan($status,$from, $to)
     {
-        $pengaduan = Pengaduan::whereBetween('tgl_pengaduan', [$from, $to])->get();
-
-        $pdf = PDF::loadView('admin.Laporan.cetak', ['pengaduan' => $pengaduan])->setPaper('a4', 'landscape');
-        // $pdf = PDF::setPaper('a4','landscape')->loadView('admin.Laporan.cetak', ['pengaduan' => $pengaduan]);
+    	if($status == 'date'){
+    		$pengaduan = Pengaduan::whereBetween('tgl_pengaduan', [$from, $to])->get();
+    	} else {
+    		$pengaduan = Pengaduan::whereBetween('tgl_pengaduan', [$from, $to])->where('status',$status)->get();
+    	}
+        // $pdf = PDF::loadView('admin.Laporan.cetak', ['pengaduan' => $pengaduan])->setPaper('a4', 'landscape');
+        $pdf = PDF::setPaper('legal','landscape')->loadView('admin.Laporan.cetak', ['pengaduan' => $pengaduan]);
+	    
 
         return $pdf->download('laporan-pengaduan.pdf');
     }
+
 }

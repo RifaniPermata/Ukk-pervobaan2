@@ -15,8 +15,8 @@
 				<div class="col-12">
 					<div class="card">
 						<div class=" card-body table-responsive">
-							<table id="masyarakatTable" class="table table-striped table-bordered" >
-						        <thead  class="table-dark text-center">
+							<table id="masyarakatTable" class="table table-hover table-striped table-bordered" >
+						        <thead  class="bg-danger text-center">
 									<tr>
 										<th>No</th>
 										<th>NIK</th>
@@ -37,7 +37,7 @@
 										
 										<td class="text-center">
 											<button class="btn btn-info">
-											<a href="{{route('masyarakat.show', $v->nik)}}" class="text-white"><i class="fas fa-eye"></i> Lihat</a>
+											<a href="{{route('masyarakat.show', $v->nik)}}" class="text-white"><i class="fas fa-eye"></i></a>
 											</button>
 										</td>
 									</tr>

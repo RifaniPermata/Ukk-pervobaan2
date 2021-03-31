@@ -24,8 +24,8 @@
 			            @endforeach
 			        @endif
 		            <div class="card">
-		                <div class="card-header">
-		                    Form Edit Petugas
+		                <div class="card-header bg-danger text-center">
+		                    <b>Form Edit Petugas</b>
 		                </div>
 		                <div class="card-body">
 		                    <form action="{{ route('petugas.store') }}" method="POST">
@@ -60,21 +60,16 @@
 		                                </select>
 		                            </div>
 		                        </div>
-		                        <div class="row">
-		                        	<div class="col-lg-6 mt-2">
+		                        <!-- <div class="row"> -->
+		                        	<div class=" mt-2">
 		                        		<button type="submit" class="btn btn-warning text-white" style="width: 100%">UPDATE</button>
 		                        	</div>
-		                    </form>	
-		                    <form action="{{ route('petugas.destroy', $petugas->id_petugas) }}" method="POST" class="col-lg-6" onsubmit="return confirm('Apakah yakin hapus data??')">
-		                        @csrf
-		                        @method('DELETE')
-		                        <button type="submit" class="btn btn-danger mt-2" style="width: 100%"S>HAPUS</button>
-		                    </form> 
+			                    </form>	
 		                    </div>                
 		                </div>
 		            </div>
 		        </div>
 		    </div>
-		</div>		
+		<!-- </div>		 -->
 	</section>
 @endsection

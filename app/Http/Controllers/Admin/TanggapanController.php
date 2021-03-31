@@ -26,7 +26,7 @@ class TanggapanController extends Controller
             $pengaduan->update(['status' => $request->status]);
 
             $tanggapan->update([
-                'tgl_tanggapan' => date('Y-m-d'),
+                'tgl_tanggapan' => \Carbon\Carbon::now(),
                 'tanggapan' => $request->tanggapan,
                 'id_petugas' => Auth::guard('admin')->user()->id_petugas,
             ]);
@@ -37,7 +37,7 @@ class TanggapanController extends Controller
 
             $tanggapan = Tanggapan::create([
                 'id_pengaduan' => $request->id_pengaduan,
-                'tgl_tanggapan' => date('Y-m-d'),
+                'tgl_tanggapan' => \Carbon\Carbon::now(),
                 'tanggapan' => $request->tanggapan,
                 'id_petugas' => Auth::guard('admin')->user()->id_petugas,
             ]);

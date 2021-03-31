@@ -77,15 +77,16 @@ class LoginController extends Controller
     {
         $data = $request->all();
         $validated = $request->validate([
-            'nik' => ['required','size:16', 'integer'],
-            'nama' => ['required'],
+            // 'nik' => ['required','size:16', 'integer'],
+            'nik' => ['required','size:16'],
+            'nama' => ['required'],            
             'email' => ['required'],
             'username_register' => ['required'],
             'register_password' => ['required','confirmed'],
             'telp' => ['required'],
 
         ]);
-        dd(1);
+        // dd(1);
         // $validate = Validator::make($data, [
         //     'nik' => ['required'],
         //     'nama' => ['required'],
@@ -100,7 +101,7 @@ class LoginController extends Controller
         // if ($validate->fails()) {
         //     return redirect()->back()->with(['pesan' => $validate->errors()]);
         // }
-        dd((int)'123adsa');
+        // dd((int)'123adsa');
         $username = Masyarakat::where('username', $request->username_register)->first();
 
         if ($username) {

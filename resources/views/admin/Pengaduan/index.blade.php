@@ -17,8 +17,8 @@
 				<div class="col-12">
 					<div class="card ">
 						<div class="card-body table-responsive">
-							<table id="pengaduanTable" class="table table-striped table-bordered" >
-						        <thead class="table-dark text-center">
+							<table id="pengaduanTable" class="table table-hover table-striped table-bordered" >
+						        <thead class="bg-danger text-center">
 									<tr>
 										<th>NO</th>
 										<th>Tanggal</th>
@@ -32,7 +32,7 @@
 									@foreach($pengaduan as $k=>$v)
 									<tr>
 										<td class="text-center"> {{ $k += 1}}</td>
-										<td> {{ $v->tgl_pengaduan->format('d-M-Y') }}</td>
+										<td> {{ tanggalIndonesia($v->tgl_pengaduan) }}</td>
 										<td> {{ $v->lokasi_kejadian }}</td>
 										<td> {{ $v->isi_laporan }}</td>
 										<td>
@@ -46,7 +46,7 @@
 										</td>
 										<td class="text-center">
 											<button class="btn btn-info">
-											<a href="{{route('pengaduan.show', $v->id_pengaduan)}}" class="text-white"><i class="fas fa-eye"></i> Lihat</a>
+											<a href="{{route('pengaduan.show', $v->id_pengaduan)}}" class="text-white"><i class="fas fa-eye"></i></a>
 											</button>
 										</td>
 									</tr>
@@ -66,7 +66,7 @@
 	<!-- DataTables  & Plugins -->
 	<script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-	{{-- <script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script> --}}
+<!-- 	{{-- <script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script> --}}
 	{{-- <script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script> --}}
 	{{-- <script src="{{ asset('assets/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script> --}}
 	{{-- <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script> --}}
@@ -75,7 +75,7 @@
 	{{-- <script src="{{ asset('assets/plugins/pdfmake/vfs_fonts.js') }}"></script> --}}
 	{{-- <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script> --}}
 	{{-- <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script> --}}
-	{{-- <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script> --}}
+	{{-- <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script> --}} -->
 	<script>
 		$(document).ready(function() {
 		    $('#pengaduanTable').DataTable();

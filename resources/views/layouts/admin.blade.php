@@ -16,7 +16,7 @@
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
   <div class="wrapper">
   {{-- section navbar atas --}}
-  <nav class="main-header navbar navbar-expand navbar-danger navbar-light ">
+  <nav class="main-header navbar navbar-expand navbar-danger navbar-dark ">
     <!-- Left navbar links -->
     <!-- menu navbar besar-kecil -->
     <ul class="navbar-nav">
@@ -35,7 +35,7 @@
       </li>
        <li class="nav-item">
         <a class="nav-link" href="{{route('logout')}}" onsubmit="return confirm('Apakah yakin ingin keluar??')">
-          {{-- <i class="fas fa-power-off"></i> --}}
+          <!-- {{-- <i class="fas fa-power-off"></i> --}} -->
           <i class="fas fa-sign-out-alt"></i>
         </a>
       </li>
@@ -77,6 +77,7 @@
               </p>
             </a>
           </li>
+          
           <li class="nav-item ">
             <a href="{{route('pengaduan.index')}}" class="nav-link {{Request::is('admin/pengaduan') ? 'active' : ''}}">
             <i class="nav-icon fas fa-bullhorn"></i>              
@@ -148,7 +149,7 @@
   </div>
   
   <!-- Main Footer -->
-  <footer class="main-footer text-center">
+  <footer class="main-footer bg-secondary text-center">
     <strong>Copyright &copy; 2021 <a href="https://www.instagram.com/rfni_p/">@rfni_p</a>.</strong>
   </footer>
 

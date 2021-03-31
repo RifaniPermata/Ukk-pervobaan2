@@ -19,8 +19,8 @@
 								<a href="{{ route('petugas.create') }}" class="btn btn-success float-right"><i class="fas fa-user-plus mr-1"></i>Petugas</a>
 						</div>
 						<div class="card-body table-responsive">   					
-							<table id="tanggapanTable" class="table table-striped table-bordered" >
-						        <thead  class="table-dark text-center">
+							<table id="tanggapanTable" class="table table-hover table-striped table-bordered" >
+						        <thead  class="bg-danger text-center">
 									<tr>
 										<th>No</th>
 										<th>Nama Petugas</th>
@@ -40,9 +40,17 @@
 										<td> {{ $v->level }}</td>
 										
 										<td class="text-center">
-											<button class="btn btn-info">
-											<a href="{{route('petugas.edit', $v->id_petugas)}}" class="text-white"><i class="fas fa-eye"></i> Lihat</a>
-											</button>
+											<div class="row container-fluid">
+												<button class="btn btn-warning">
+												<a href="{{route('petugas.edit', $v->id_petugas)}}" class="text-white"><i class="far fa-edit"></i></i></a>
+												</button>
+												 <form action="{{ route('petugas.destroy', $v->id_petugas) }}" method="POST" class="col-lg-6" onsubmit="return confirm('Apakah yakin hapus data??')">
+							                        @csrf
+							                        @method('DELETE')
+							                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+							                    </form> 
+												
+											</div>
 										</td>
 									</tr>
 									@endforeach

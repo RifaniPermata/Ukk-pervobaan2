@@ -11,15 +11,15 @@
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<b>Data Berdasarkan Tanggal</b>
+							<b>Exsport Data</b>
 							<div class="float-right">
 								<button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-search"></i> Cari Data</button>
 							</div>
 						</div>
 						<div class="card-body table-responsive">
 							@if($pengaduan ?? '')
-								<table class="table table-striped table-bordered">
-									<thead class="text-center table-dark">
+								<table class="table table-hover table-striped table-bordered">
+									<thead class="text-center bg-danger">
 										<tr>
 											<th>No</th>
 											<th>Nama Masyarakat</th>
@@ -39,12 +39,12 @@
 												<td>{{ $k += 1 }}</td>
 		                                        <td>{{ $v->user->nama }}</td>
 		                                        <td>{{ tanggalIndonesia($v->tgl_pengaduan) }}</td>
-		                                        <td style="max-width: 150px">{{ $v->isi_laporan }}</td>
-		                                        <td style="max-width: 150px">{{ $v->lokasi_kejadian }}</td>
+		                                        <td>{{ $v->isi_laporan }}</td>
+		                                        <td>{{ $v->lokasi_kejadian }}</td>
 		                                        <td>{{ $v->tanggapan->petugas->nama_petugas ?? '' }}</td>
 		                                        <td>{{ $v->tanggapan->petugas->level ?? '' }}</td>
 		                                        <td>{{ tanggalIndonesia($v->tanggapan->tgl_tanggapan ?? '' ) }}</td>
-		                                        <td style="max-width: 150px">{{ $v->tanggapan->tanggapan ?? '' }}</td>
+		                                        <td>{{ $v->tanggapan->tanggapan ?? '' }}</td>
 												<td>
 													@if($v->status == '0')
 														<a href="#" class="badge badge-danger">Pending</a>
@@ -66,8 +66,9 @@
 						</div>
 						<div class="card-footer ">
 							<div class="float-right">
-								@if($pengaduan && $from)
-									<a href="{{route('export.laporan',['from'=>$from, 'to'=>$to])}}" class="btn btn-danger"><i class="fas fa-file-pdf"></i> Export Pdf</a>
+								@if($pengaduan ?? '')
+
+									<a href="{{route('export.laporan',['status' => $statusExport ?? 'date','from'=>$from, 'to'=>$to])}}" class="btn btn-danger"><i class="fas fa-file-pdf"></i> Export Pdf</a>
 								@endif
 							</div>
 						</div>
@@ -88,15 +89,15 @@
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
-	      <div class="modal-header">
+	      <div class="modal-header bg-danger">
 	        <!-- <h5 class="modal-title" id="exampleModalLabel">Cari Data</h5> -->
 		        <div class="dropdown">
-				  <a class="dropdown-toggle text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    Cari Berdasarkan
+				  <a class="dropdown-toggle text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<strong> Cari Berdasarkan </strong>
 				  </a>
 				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				    <a class="dropdown-item" href="#">Tanggal</a>
-				    <a class="dropdown-item" href="#">Status</a>
+				    <a id="searchByTanggal" class="dropdown-item" href="#">Tanggal</a>
+				    <a id="searchByStatus" class="dropdown-item" href="#">Status</a>
 				  </div>
 				</div>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -105,10 +106,10 @@
 	      </div>
 	      <div class="modal-body">
 	        <div class="col-lg-8 col-12 container-fluid">
-	      	<button id="searchByTanggal" class="btn btn-success">Tanggal</button>
-	      	<button id="searchByStatus" class="btn btn-success">Status</button>
+	      <!-- 	<button id="searchByTanggal" class="btn btn-success">Tanggal</button>
+	      	<button id="searchByStatus" class="btn btn-success">Status</button> -->
 				<div class="card" id="tanggal-card">
-					<div class="card-header">
+					<div class="card-header bg-danger">
 						Cari Berdasarkan Tanggal
 					</div>
 					<div class="card-body">
@@ -127,7 +128,7 @@
 			</div>
 			<div class="col-lg-8 col-12 container-fluid">
 				<div class="card" id="status-card">
-					<div class="card-header">
+					<div class="card-header bg-danger">
 						Cari Berdasarkan Status
 					</div>
 					<div class="card-body">

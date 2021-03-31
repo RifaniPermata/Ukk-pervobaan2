@@ -20,13 +20,13 @@
 
 	 @yield('js')
     {{-- Footer --}}
-  {{--   <footer class="text-center p-4 text-white bg-secondary ml-auto">
+  <!-- {{--   <footer class="text-center p-4 text-white bg-secondary ml-auto">
       © 2021 PERAKAT | By
       <a href="https://www.instagram.com/rfni_p/" class="text-white" target="_blank">@rfni_p</a>
-    </footer> --}}
+    </footer> --}} -->
       <footer class="main-footer p-4 bg-secondary text-center text-white" style="background: #0d0d0d !important">
-    <strong>Copyright Perakat &copy; 2021 <a href="https://www.instagram.com/rfni_p/">@rfni_p</a>.</strong>
-  </footer>
+        <strong>Copyright Perakat &copy; 2021 <a href="https://www.instagram.com/rfni_p/">@rfni_p</a>.</strong>
+      </footer>
 </body>
 
 </html>

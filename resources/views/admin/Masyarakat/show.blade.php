@@ -12,8 +12,8 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-8 col-12 mt-5 container">
-					<div class="card">
-						<div class="card-header text-center">
+					<div class="card ">
+						<div class="card-header bg-danger text-center">
 							<b>Detail Masyarakat</b>
 						</div>
 						<div class="card-body table-responsive">

@@ -137,7 +137,7 @@
                     @csrf
                     <div class="form-group">
                     	<label for="nik" style="color: #fff !important">NIK</label>
-                        <input id="nik" type="number" onkeypress="return Angka(event)" value="{{ old('nik') }}" pattern="[0-9]+" title="only letters" required name="nik" placeholder="NIK" class="form-control @error('nik') is-invalid @enderror">
+                        <input id="nik" type="number" onkeypress="return Angka(event)" value="{{ old('nik') }}"required name="nik" placeholder="NIK" class="form-control @error('nik') is-invalid @enderror">
                         @error('nik')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -146,7 +146,7 @@
                     </div>
 	                <div class="form-group">
 	                    <label for="nama" style="color: #fff !important">Nama Lengkap</label>
-	                    <input id="nama" type="text" onkeypress="return Huruf(event)" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}"  autocomplete="name" pattern="[A-Za-z]+" title="letters only" required placeholder="Nama Lengkap" autofocus>
+	                    <input id="nama" type="text" onkeypress="return Huruf(event)"  class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}"  autocomplete="name" required placeholder="Nama Lengkap" autofocus>
 	                    @error('nama')
 	                        <span class="invalid-feedback" role="alert">
 	                            <strong>{{ $message }}</strong>
@@ -173,7 +173,7 @@
                   	</div>
                   	<div class="form-group">
 	                	<label for="telp" style="color: #fff !important">No. Telp</label>
-                        <input id="telp" type="tel" onkeypress="return Angka(event)" name="telp"  value="{{ old('telp') }}" required placeholder="No. Telp" class="form-control @error('telp') is-invalid @enderror">
+                        <input id="telp" type="tel" name="telp" onkeypress="return Angka(event)" value="{{ old('telp') }}" required placeholder="No. Telp" class="form-control @error('telp') is-invalid @enderror">
                         @error('telp')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -279,7 +279,7 @@
       <div class="d-md-flex flex-row justify-content-around bd-highlight mb-3">
         <div class="p-2 bd-highlight card ml-auto mr-auto mb-3" style="width: 13rem">
           <i class="fa fa-sign-in fa-5x text-center rounded-circle p-1 mx-5 text-white" aria-hidden="true" style="background: red;"></i>
-          <div class="card-body text-center">
+          <div class="card-body Laporan text-center">
             <h5>1. Masuk</h5>
             <p class="card-text">
               Masuk ke akun anda, jika belum punya akun maka Daftar terlebih dahulu. 
@@ -391,13 +391,13 @@
 @section('js')
   
     <script>
-      function Angka(evt){
-        var charCode = (evt.which) ? evt.which : evt.keyCode
-        return !(charCode > 31 && (charCode < 48 || charCode > 57));
+       function Angka(evt){
+          var charCode = (evt.which) ? evt.which : evt.keyCode
+          return !(charCode > 31 && (charCode < 48 || charCode > 57));
       }
-      function Huruf(event) {
+      function Huruf(evt) {
         var key = event.keyCode;
-        return ((key >= 65 && key <= 90) || (event.keyCode > 96 && event.keyCode < 123) || key == 8);
+        return ((key >= 65 && key <= 90) || (event.keyCode > 96 && event.keyCode < 123) || key == 8 || key ==32);
       };
 
       @error('username')

@@ -21,6 +21,7 @@ class MasyarakatTableSeeder extends Seeder
 			'username' => 'masyarakat',
 			'password' => Hash::make('masyarakat153'),
 			'telp' => '087612312312',
+            'email_verified_at' => \Carbon\Carbon::now(),
 			'email' => 'masyarakat@gmail.com'
         ]);
     }

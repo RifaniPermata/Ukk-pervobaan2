@@ -22,8 +22,8 @@
 	                </div>
 				</div>
 				<div class="card-body p-2 table-responsive ">
-					<table class="table table-striped table-bordered" >
-					    <thead class="table-dark text-center">
+					<table class="table table-hover table-striped table-bordered" >
+					    <thead class="bg-danger text-center">
 							<tr>
 								<th>NO</th>
 								<th>Tanggal</th>
@@ -36,9 +36,9 @@
 							@foreach($pengaduan as $k=>$v)
 								<tr>
 									<td class="text-center"> {{ $k += 1}}</td>
-									<td> {{ $v->tgl_pengaduan->format('d-M-Y') }}</td>
-									<td style="max-width: 150px"> {{ $v->lokasi_kejadian }}</td>
-									<td style="max-width: 150px"> {{ $v->isi_laporan }}</td>
+									<td> {{ tanggalIndonesia($v->tgl_pengaduan) }}</td>
+									<td> {{ $v->lokasi_kejadian }}</td>
+									<td> {{ $v->isi_laporan }}</td>
 									<td>
 										@if($v->status == '0')
 											<a href="#" class="badge badge-danger">Pending</a>

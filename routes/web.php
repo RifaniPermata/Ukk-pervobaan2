@@ -56,7 +56,7 @@ Route::prefix('admin')->group(function(){
 		Route::get('laporan', [LaporanController::class, 'index'])->name('laporan.index');
 		Route::post('getLaporanTanggal',[LaporanController::class,'getLaporan'])->name('cari.laporan');
 		Route::post('getLaporanStatus',[LaporanController::class,'status'])->name('cari.status');
-		Route::get('cetak/{from}/{to}',[LaporanController::class,'cetakLaporan'])->name('export.laporan');
+		Route::get('cetak/{status}/{from}/{to}',[LaporanController::class,'cetakLaporan'])->name('export.laporan');
 
 		Route::resource('petugas', PetugasController::class);
 		Route::resource('masyarakat', MasyarakatController::class);

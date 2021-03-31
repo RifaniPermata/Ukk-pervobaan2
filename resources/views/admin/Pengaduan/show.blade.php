@@ -13,7 +13,7 @@
 			<div class="row">
 				<div class="col-lg-6 col-12">
 					<div class="card">
-						<div class="card-header text-center">
+						<div class="card-header bg-danger text-center">
 							<b>Pengaduan Masyarakat</b>
 						</div>
 						<div class="card-body table-responsive">
@@ -25,9 +25,24 @@
 										<td>{{$pengaduan->nik}}</td>
 									</tr>
 									<tr>
+										<th>Nama Masyarakat</th>
+										<td>:</td>
+										<td>{{$pengaduan->user->nama}}</td>
+									</tr>
+									<tr>
+										<th>Email</th>
+										<td>:</td>
+										<td>{{$pengaduan->user->email}}</td>
+									</tr>
+									<tr>
+										<th>Isi Laporan</th>
+										<td>:</td>
+										<td>{{$pengaduan->isi_laporan}}</td>
+									</tr>
+									<tr>
 										<th>Tanggal Pengaduan</th>
 										<td>:</td>
-										<td>{{$pengaduan->tgl_pengaduan}}</td>
+										<td>{{tanggalIndonesia($pengaduan->tgl_pengaduan)}}</td>
 									</tr>
 									<tr>
 										<th>Lokasi</th>
@@ -64,7 +79,7 @@
 				</div>
 				<div class="col-lg-6 col-12">
 					<div class="card">
-						<div class="card-header text-center">
+						<div class="card-header bg-danger text-center">
 							<b>Tanggapan Petugas</b>
 						</div>
 						<div class="card-body">

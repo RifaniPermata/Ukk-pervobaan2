@@ -71,4 +71,15 @@ class laporanMasyarakat extends Controller
 
         }
     }
+    // public function update(Request $request, $siapa = ''){
+    //     $data = $request->all();
+    //      $petugas =Pengaduan::where('nik', Auth::guard('masyarakat')->user()->nik);
+
+    //     $pengaduan->update([
+    //         'isi_laporan' => $data['isi_laporan'],
+    //          'lokasi_kejadian' => $data['lokasi_kejadian'],
+    //         'kategori_kejadian' => $data['kategori_kejadian'],
+    //     ]);
+    //     return view('masyarakat.laporan');
+    // }
 }
